@@ -31,6 +31,25 @@ async function startApp() {
         const renderer = new QuestionRenderer();
         const resultsView = new ResultsRenderer();
         const submission = new SubmissionController(engine);
+        const endTestBtn = document.getElementById('end-test-btn') as HTMLButtonElement;
+
+        const finishExam = () => {
+             if (examTimer) examTimer.stop();
+             localStorage.removeItem('exam_progress'); // Clear saved state
+            resultsView.render(engine.getQuestions(), engine.getState().answers);
+
+        if (endTestBtn) endTestBtn.style.display = 'none';
+
+      };
+
+if (endTestBtn) {
+    endTestBtn.addEventListener('click', () => {
+        const confirmed = confirm("Are you sure you want to end the test? This will submit all current answers.");
+        if (confirmed) {
+            finishExam();
+        }
+    });
+}
 
         let examTimer: Timer | null = null;
         let initialSeconds: number | undefined;

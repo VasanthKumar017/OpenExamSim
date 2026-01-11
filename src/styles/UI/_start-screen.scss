@@ -18,6 +18,10 @@
     opacity: 0;
     pointer-events: none;
   }
+
+  #end-test-btn {
+  display: none; /* Hidden until the exam starts */
+}
 }
 
 .start-card {

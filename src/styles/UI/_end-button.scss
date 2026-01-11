@@ -1,0 +1,42 @@
+@use '../variables' as *;
+@use 'sass:color';
+
+.header-content {
+  position: relative; // This is the anchor for the absolute button
+  display: flex;
+  flex-direction: column; // Stack Timer and Counter in the center
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+  min-height: 80px;
+}
+
+.end-test-btn {
+  // Positioning logic
+  position: absolute; 
+//   top: 50%;           // Center vertically relative to header
+  right: 20px;        // Push to the far right
+  transform: translateY(-50%); // Fine-tune vertical centering
+
+  background-color: #ef4444; 
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 700; // Thicker font for "End Test"
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  text-transform: uppercase; // Makes it look more like a control button
+  z-index: 10;
+
+  &:hover {
+    background-color: #dc2626; // Darker red on hover
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+}
