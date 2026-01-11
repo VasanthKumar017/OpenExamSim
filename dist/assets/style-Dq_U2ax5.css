@@ -153,6 +153,63 @@
   background-color: rgb(18.5714285714, 76.1428571429, 202.4285714286);
 }
 
+.option-card {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.option-card:hover {
+  border-color: #2563eb;
+  background-color: #f8fafc;
+}
+.option-card.selected {
+  background-color: rgb(247.2142857143, 249.4285714286, 254.2857142857);
+  border-color: #2563eb;
+}
+.option-card.selected .radio-section .option-radio {
+  accent-color: #2563eb;
+}
+.option-card.selected .option-text {
+  color: rgb(14.2857142857, 58.5714285714, 155.7142857143);
+  font-weight: 500;
+}
+.option-card .radio-wrapper {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+.option-card .option-label-letter {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 20px;
+  color: #2563eb;
+}
+.option-card .radio-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 1rem;
+  margin-top: 0.2rem;
+}
+.option-card .radio-section .option-radio {
+  width: 18px;
+  height: 18px;
+}
+.option-card .radio-section .designator {
+  font-weight: 700;
+  color: #64748b;
+}
+.option-card .option-text {
+  flex: 1;
+  line-height: 1.5;
+  font-size: 1.1rem;
+}
+
 body {
   background-color: #f8fafc;
   color: #1e293b;
@@ -196,55 +253,4 @@ body {
 .exam-layout .nav-grid .nav-item.answered {
   background: #c6f6d5;
   border-color: #48bb78;
-}
-.exam-layout .option-card {
-  display: flex;
-  align-items: center;
-  padding: 1.25rem;
-  margin-bottom: 1rem;
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-.exam-layout .option-card:hover {
-  border-color: #2563eb;
-  background-color: #f8fafc;
-}
-.exam-layout .option-card.selected {
-  background-color: rgb(247.2142857143, 249.4285714286, 254.2857142857);
-  border-color: #2563eb;
-}
-.exam-layout .option-card.selected .radio-section .option-radio {
-  accent-color: #2563eb;
-}
-.exam-layout .option-card .radio-wrapper {
-  margin-right: 12px;
-  display: flex;
-  align-items: center;
-}
-.exam-layout .option-card .option-label-letter {
-  font-weight: bold;
-  margin-right: 10px;
-  min-width: 20px;
-}
-.exam-layout .option-card .radio-section {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-right: 1rem;
-  margin-top: 0.2rem;
-}
-.exam-layout .option-card .radio-section .option-radio {
-  width: 18px;
-  height: 18px;
-}
-.exam-layout .option-card .radio-section .designator {
-  font-weight: 700;
-  color: #64748b;
-}
-.exam-layout .option-card .option-text {
-  flex: 1;
-  line-height: 1.5;
-  font-size: 1.1rem;
 }

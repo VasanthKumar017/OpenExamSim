@@ -177,21 +177,54 @@ class Timer {
   }
 }
 
+class SubmissionController {
+  container;
+  engine;
+  constructor(engine) {
+    this.engine = engine;
+    this.container = document.getElementById("submission-slot");
+  }
+  // This is the method the error is complaining about
+  renderLockBtn(selectedIndex, onConfirm) {
+    this.container.innerHTML = `
+            <button id="lock-btn" class="lock-btn">Confirm Answer</button>
+        `;
+    const btn = document.getElementById("lock-btn");
+    btn.onclick = () => {
+      this.engine.handleAnswer(selectedIndex);
+      btn.innerText = "Locked ✓";
+      btn.classList.add("locked");
+      btn.disabled = true;
+      onConfirm();
+    };
+  }
+  clear() {
+    if (this.container) {
+      this.container.innerHTML = "";
+    }
+  }
+}
+
 async function startApp() {
   const appContainer = document.querySelector("#app");
   const useTimer = true;
-  const exTime = 3600;
+  const exTime = 60 * 60;
   try {
     const questions = await fetchExamData();
     const engine = new ExamEngine(questions);
     const renderer = new QuestionRenderer();
     const resultsView = new ResultsRenderer();
+    const submission = new SubmissionController(engine);
     let examTimer = null;
+    const updateNavigationUI = () => {
+      window.dispatchEvent(new Event("refresh-nav"));
+    };
     const updateUI = () => {
       const state = engine.getState();
       const currentQ = engine.getCurrentQuestion();
       const currentAns = state.answers[state.currentIdx];
       renderer.render(currentQ, currentAns);
+      submission.clear();
       const nextBtn = document.getElementById("next-btn");
       const prevBtn = document.getElementById("prev-btn");
       if (prevBtn && nextBtn) {
@@ -201,32 +234,32 @@ async function startApp() {
     };
     if (useTimer) {
       examTimer = new Timer(exTime, () => {
+        alert("Time is up!");
+        resultsView.render(engine.getQuestions(), engine.getState().answers);
       });
       examTimer.start();
     }
-    setupNavigation(
-      engine,
-      updateUI,
-      () => {
-        if (examTimer) examTimer.stop();
-        const state = engine.getState();
-        const questions2 = engine.getQuestions();
-        resultsView.render(questions2, state.answers);
-      }
-    );
+    setupNavigation(engine, updateUI, () => {
+      if (examTimer) examTimer.stop();
+      resultsView.render(engine.getQuestions(), engine.getState().answers);
+    });
     window.addEventListener("answer-selected", (e) => {
-      const customEvent = e;
-      const { index } = customEvent.detail;
-      engine.handleAnswer(index);
-      updateUI();
+      const { index } = e.detail;
+      const allOptions = document.querySelectorAll(".option-card");
+      allOptions.forEach((card) => card.classList.remove("selected"));
+      const selectedCard = allOptions[index];
+      if (selectedCard) {
+        selectedCard.classList.add("selected");
+        const radio = selectedCard.querySelector("input");
+        if (radio) radio.checked = true;
+      }
+      submission.renderLockBtn(index, () => {
+        updateNavigationUI();
+      });
     });
     updateUI();
   } catch (error) {
-    appContainer.innerHTML = `
-            <div class="error">
-                <h1>Error loading exam</h1>
-                <p>Check public/questions.json</p>
-            </div>`;
+    appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
     console.error(error);
   }
 }

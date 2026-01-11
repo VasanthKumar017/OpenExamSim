@@ -18,10 +18,11 @@ export class QuestionRenderer {
             card.className = 'option-card';
             
             // Logic to check if this specific index is selected
+            // Inside your render method in QuestionRenderer.ts
             const isSelected = Array.isArray(currentAnswer) 
                 ? currentAnswer.includes(index) 
                 : currentAnswer === index;
-
+            
             if (isSelected) card.classList.add('selected');
 
             // Added the radio input here

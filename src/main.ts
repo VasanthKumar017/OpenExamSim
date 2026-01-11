@@ -4,20 +4,27 @@ import { QuestionRenderer } from './core/renderer';
 import { fetchExamData } from './core/data-loader';
 import { setupNavigation } from './components/Navigation';
 import { ResultsRenderer } from './components/ResultsRenderer';
-import { Timer } from './components/Timer'; // Import our new component
+import { Timer } from './components/Timer';
+import { SubmissionController } from './components/Submission';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
-    const useTimer = true; 
-    const exTime = 1 * 60; // 10 * 60 = 10 minutes in seconds
+    const useTimer = true;
+    const exTime = 60 * 60; // 60 minutes
 
     try {
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
         const renderer = new QuestionRenderer();
         const resultsView = new ResultsRenderer();
-        
+        const submission = new SubmissionController(engine);
+
         let examTimer: Timer | null = null;
+
+        // Helper to refresh the nav-grid dots
+        const updateNavigationUI = () => {
+            window.dispatchEvent(new Event('refresh-nav'));
+        };
 
         const updateUI = () => {
             const state = engine.getState();
@@ -25,6 +32,7 @@ async function startApp() {
             const currentAns = state.answers[state.currentIdx];
 
             renderer.render(currentQ, currentAns);
+            submission.clear();
 
             const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
             const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
@@ -36,47 +44,48 @@ async function startApp() {
         };
 
         // --- TIMER INITIALIZATION ---
-
-            if (useTimer) {
-                examTimer = new Timer(exTime, () => { /* ... */ });
-                examTimer.start();
-            } else {
-                // Optional: Hide the timer element if not being used
-                const tElement = document.getElementById('timer');
-                if (tElement) tElement.style.display = 'none';
-            }
+        if (useTimer) {
+            examTimer = new Timer(exTime, () => {
+                alert("Time is up!");
+                resultsView.render(engine.getQuestions(), engine.getState().answers);
+            });
+            examTimer.start();
+        } else {
+            const tElement = document.getElementById('timer');
+            if (tElement) tElement.style.display = 'none';
+        }
 
         // --- NAVIGATION & SUBMISSION ---
-        setupNavigation(
-            engine,
-            updateUI,
-            () => {
-                // This runs when "Finish Exam" is clicked
-                if (examTimer) examTimer.stop(); // Stop the clock
-                
-                const state = engine.getState();
-                const questions = engine.getQuestions();
-                resultsView.render(questions, state.answers);
-            }
-        );
+        setupNavigation(engine, updateUI, () => {
+            if (examTimer) examTimer.stop();
+            resultsView.render(engine.getQuestions(), engine.getState().answers);
+        });
 
         // --- EVENT LISTENERS ---
         window.addEventListener('answer-selected', (e: Event) => {
-            const customEvent = e as CustomEvent;
-            const { index } = customEvent.detail;
-            engine.handleAnswer(index);
-            updateUI();
+            const { index } = (e as CustomEvent).detail;
+
+            // Highlight the selected card visually
+            const allOptions = document.querySelectorAll('.option-card');
+            allOptions.forEach(card => card.classList.remove('selected'));
+
+            const selectedCard = allOptions[index] as HTMLElement;
+            if (selectedCard) {
+                selectedCard.classList.add('selected');
+                const radio = selectedCard.querySelector('input') as HTMLInputElement;
+                if (radio) radio.checked = true;
+            }
+
+            // Render Lock-In button and call helper on confirm
+            submission.renderLockBtn(index, () => {
+                updateNavigationUI(); // Function is now read and used!
+            });
         });
 
-        // Initial render
         updateUI();
 
     } catch (error) {
-        appContainer.innerHTML = `
-            <div class="error">
-                <h1>Error loading exam</h1>
-                <p>Check public/questions.json</p>
-            </div>`;
+        appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
         console.error(error);
     }
 }
