@@ -210,6 +210,33 @@
   font-size: 1.1rem;
 }
 
+.submission-bar {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: center;
+}
+.submission-bar .lock-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.submission-bar .lock-btn:disabled {
+  background-color: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+.submission-bar .lock-btn.locked {
+  background-color: #059669;
+  box-shadow: 0 0 10px rgba(5, 150, 105, 0.3);
+}
+
 body {
   background-color: #f8fafc;
   color: #1e293b;

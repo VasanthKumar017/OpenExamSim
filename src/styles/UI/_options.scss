@@ -20,31 +20,20 @@
     background-color: color.adjust($primary-blue, $lightness: 45%);
     border-color: $primary-blue;
 
-    .radio-section .option-radio {
+    // Fixed: Now matches the class created in your renderer.ts
+    .radio-wrapper .option-radio {
       accent-color: $primary-blue;
     }
     
-    // Make the text pop a bit more when selected
+    // Makes the text slightly darker and bolder when selected
     .option-text {
       color: color.adjust($primary-blue, $lightness: -20%);
       font-weight: 500;
     }
   }
 
+  // Renamed from .radio-section to .radio-wrapper to match TypeScript
   .radio-wrapper {
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-  }
-
-  .option-label-letter {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 20px;
-    color: $primary-blue;
-  }
-
-  .radio-section {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -54,6 +43,7 @@
     .option-radio {
       width: 18px;
       height: 18px;
+      cursor: pointer;
     }
 
     .designator {
@@ -62,9 +52,17 @@
     }
   }
 
+  .option-label-letter {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 20px;
+    color: $primary-blue;
+  }
+
   .option-text {
     flex: 1;
     line-height: 1.5;
     font-size: 1.1rem;
+    color: $text-dark;
   }
 }

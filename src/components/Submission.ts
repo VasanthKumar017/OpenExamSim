@@ -8,6 +8,7 @@ export class SubmissionController {
         this.engine = engine;
         // This MUST match the ID in your index.html
         this.container = document.getElementById('submission-slot')!;
+        this.container.classList.add('submission-bar');
     }
 
     // This is the method the error is complaining about
