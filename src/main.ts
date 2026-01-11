@@ -15,6 +15,12 @@ async function startApp() {
     const useTimer = true;
     const exTime = 60 * 60; // 60 minutes
 
+    // --- HELPER: SAVE TO LOCAL STORAGE ---
+    const saveProgress = (engine: ExamEngine) => {
+        const state = engine.getState();
+        localStorage.setItem('exam_progress', JSON.stringify(state));
+    };
+
     try {
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
@@ -24,7 +30,17 @@ async function startApp() {
 
         let examTimer: Timer | null = null;
 
-        // Helper to refresh the nav-grid dots
+        // --- LOAD SESSION ON START --- 
+        const saved = localStorage.getItem('exam_progress');
+        if (saved) {
+            const parsedState = JSON.parse(saved);
+            // Ensure loadState exists in your engine.ts
+            if (typeof (engine as any).loadState === 'function') {
+                (engine as any).loadState(parsedState);
+            }
+            startScreen.classList.add('hidden');
+        }
+
         const updateNavigationUI = () => {
             window.dispatchEvent(new Event('refresh-nav'));
         };
@@ -51,41 +67,34 @@ async function startApp() {
             }
         };
 
-        // --- PREPARE TIMER (But don't start yet) ---
         if (useTimer) {
             examTimer = new Timer(exTime, () => {
                 alert("Time is up!");
+                localStorage.removeItem('exam_progress'); // Clear on expiration
                 resultsView.render(engine.getQuestions(), engine.getState().answers);
             });
-        } else {
-            const tElement = document.getElementById('timer');
-            if (tElement) tElement.style.display = 'none';
         }
 
         // --- NAVIGATION & SUBMISSION ---
-        setupNavigation(engine, updateUI, () => {
+        setupNavigation(engine, () => {
+            updateUI();
+            saveProgress(engine); // SAVE: When moving between questions
+        }, () => {
             if (examTimer) examTimer.stop();
+            localStorage.removeItem('exam_progress'); // CLEAR: When exam finished
             resultsView.render(engine.getQuestions(), engine.getState().answers);
         });
 
         // --- START BUTTON LOGIC ---
         startBtn.addEventListener('click', () => {
-            // Hide the overlay
             startScreen.classList.add('hidden');
-            
-            // Start the timer
-            if (useTimer && examTimer) {
-                examTimer.start();
-            }
-
-            // Show the first question
+            if (useTimer && examTimer) examTimer.start();
             updateUI();
         });
 
         // --- EVENT LISTENERS ---
         window.addEventListener('answer-selected', (e: Event) => {
             const { index } = (e as CustomEvent).detail;
-
             const allOptions = document.querySelectorAll('.option-card');
             allOptions.forEach(card => card.classList.remove('selected'));
 
@@ -98,13 +107,22 @@ async function startApp() {
 
             submission.renderLockBtn(index, () => {
                 updateNavigationUI();
+                saveProgress(engine); // SAVE: When an answer is confirmed
             });
         });
+
+        // If resuming a saved session, render immediately
+        if (saved) {
+            if (useTimer && examTimer) examTimer.start();
+            updateUI();
+        }
 
     } catch (error) {
         appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
         console.error(error);
     }
 }
+
+
 
 startApp();

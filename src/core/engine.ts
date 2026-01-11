@@ -71,4 +71,9 @@ export class ExamEngine {
         this.state.isSubmitted = true;
         // You can also stop a timer here if you have one
     }
+
+    // Add this method to allow the engine to resume from a saved state
+    public loadState(savedState: ExamState) {
+    this.state = savedState;
+    }
 }
