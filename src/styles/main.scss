@@ -10,15 +10,26 @@ body {
 
 .exam-layout {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row; // Return to side-by-side layout for tablets/desktops
+    padding: 2rem;
+    gap: 2rem;
+  }
 
   .question-area {
     flex: 1;
     background: white;
-    padding: 2.5rem;
+    padding: 1.5rem;
     border-radius: $border-radius;
     box-shadow: $shadow-sm;
+
+    @media (min-width: 768px) {
+      padding: 2.5rem;
+    }
 
     h2 {
       margin-bottom: 1.5rem;

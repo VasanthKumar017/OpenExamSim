@@ -8,6 +8,8 @@
   margin-top: 2rem;
   padding-top: 1.5rem;
   border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap; // Allow buttons to wrap on very small screens
+  gap: 10px;
 
   #submission-slot {
     display: flex;
@@ -17,7 +19,9 @@
   }
 
   .primary-btn, .secondary-btn {
-    min-width: 120px;
+    min-width: 100px; // Reduce min-width
+    flex: 1; // Grow to fill space
+    padding: 0.8rem 1rem; // Adjust padding
   }
 
   .primary-btn {
