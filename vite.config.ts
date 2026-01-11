@@ -15,6 +15,10 @@ export default defineConfig({
       shared: ['typescript'] // Prevents loading the same library multiple times
     })
   ],
+  server: {
+    port: 8080,      // Set your preferred starting port
+    strictPort: false // If 8080 is busy, it will automatically try 8081, 8082, etc.
+  },
   build: {
     target: 'esnext', // Required for Module Federation to work with top-level await
     minify: false,
