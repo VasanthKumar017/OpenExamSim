@@ -4,14 +4,19 @@ import { QuestionRenderer } from './core/renderer';
 import { fetchExamData } from './core/data-loader';
 import { setupNavigation } from './components/Navigation';
 import { ResultsRenderer } from './components/ResultsRenderer';
+import { Timer } from './components/Timer'; // Import our new component
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
-    
+    const useTimer = true; 
+
     try {
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
         const renderer = new QuestionRenderer();
+        const resultsView = new ResultsRenderer();
+        
+        let examTimer: Timer | null = null;
 
         const updateUI = () => {
             const state = engine.getState();
@@ -19,34 +24,42 @@ async function startApp() {
             const currentAns = state.answers[state.currentIdx];
 
             renderer.render(currentQ, currentAns);
-            
+
             const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
             const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
-            
+
             if (prevBtn && nextBtn) {
                 prevBtn.disabled = state.currentIdx === 0;
                 nextBtn.innerText = state.currentIdx === state.total - 1 ? "Finish Exam" : "Next";
             }
         };
 
-        // Initialize our new Component logic
-// Inside main.ts
-const resultsView = new ResultsRenderer(); 
+        // --- TIMER INITIALIZATION ---
 
-setupNavigation(
-    engine, 
-    updateUI, 
-    () => {
-        // This is what happens when she clicks "Finish"
-        const state = engine.getState();
-        const questions = engine.getQuestions();
-        
-        // Pass the questions and the answers map
-        resultsView.render(questions, state.answers);
-    }
-);
+            if (useTimer) {
+                examTimer = new Timer(3600, () => { /* ... */ });
+                examTimer.start();
+            } else {
+                // Optional: Hide the timer element if not being used
+                const tElement = document.getElementById('timer');
+                if (tElement) tElement.style.display = 'none';
+            }
 
-        // Handle answer selection (stays in main for communication between Renderer and Engine)
+        // --- NAVIGATION & SUBMISSION ---
+        setupNavigation(
+            engine,
+            updateUI,
+            () => {
+                // This runs when "Finish Exam" is clicked
+                if (examTimer) examTimer.stop(); // Stop the clock
+                
+                const state = engine.getState();
+                const questions = engine.getQuestions();
+                resultsView.render(questions, state.answers);
+            }
+        );
+
+        // --- EVENT LISTENERS ---
         window.addEventListener('answer-selected', (e: Event) => {
             const customEvent = e as CustomEvent;
             const { index } = customEvent.detail;
@@ -54,10 +67,15 @@ setupNavigation(
             updateUI();
         });
 
+        // Initial render
         updateUI();
 
     } catch (error) {
-        appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1><p>Check public/questions.json</p></div>`;
+        appContainer.innerHTML = `
+            <div class="error">
+                <h1>Error loading exam</h1>
+                <p>Check public/questions.json</p>
+            </div>`;
         console.error(error);
     }
 }

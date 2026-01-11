@@ -135,12 +135,56 @@ class ResultsRenderer {
   }
 }
 
+class Timer {
+  timeLeft;
+  intervalId = null;
+  element = null;
+  onTimeUp;
+  constructor(durationSeconds, onTimeUp) {
+    this.timeLeft = durationSeconds;
+    this.onTimeUp = onTimeUp;
+    this.element = document.getElementById("timer");
+  }
+  start() {
+    if (!this.element) return;
+    this.updateDisplay();
+    this.intervalId = window.setInterval(() => {
+      this.timeLeft--;
+      this.updateDisplay();
+      if (this.timeLeft <= 0) {
+        this.stop();
+        this.onTimeUp();
+      }
+    }, 1e3);
+  }
+  stop() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+  updateDisplay() {
+    if (this.element) {
+      const mins = Math.floor(this.timeLeft / 60);
+      const secs = this.timeLeft % 60;
+      const timeString = `${mins}:${secs.toString().padStart(2, "0")}`;
+      this.element.innerText = `Time Remaining: ${timeString}`;
+      if (this.timeLeft < 300) {
+        this.element.classList.add("timer-low");
+      }
+    }
+  }
+}
+
 async function startApp() {
   const appContainer = document.querySelector("#app");
+  const useTimer = true;
   try {
     const questions = await fetchExamData();
     const engine = new ExamEngine(questions);
     const renderer = new QuestionRenderer();
+    const resultsView = new ResultsRenderer();
+    let examTimer = null;
     const updateUI = () => {
       const state = engine.getState();
       const currentQ = engine.getCurrentQuestion();
@@ -153,11 +197,16 @@ async function startApp() {
         nextBtn.innerText = state.currentIdx === state.total - 1 ? "Finish Exam" : "Next";
       }
     };
-    const resultsView = new ResultsRenderer();
+    if (useTimer) {
+      examTimer = new Timer(3600, () => {
+      });
+      examTimer.start();
+    }
     setupNavigation(
       engine,
       updateUI,
       () => {
+        if (examTimer) examTimer.stop();
         const state = engine.getState();
         const questions2 = engine.getQuestions();
         resultsView.render(questions2, state.answers);
@@ -171,7 +220,11 @@ async function startApp() {
     });
     updateUI();
   } catch (error) {
-    appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1><p>Check public/questions.json</p></div>`;
+    appContainer.innerHTML = `
+            <div class="error">
+                <h1>Error loading exam</h1>
+                <p>Check public/questions.json</p>
+            </div>`;
     console.error(error);
   }
 }
