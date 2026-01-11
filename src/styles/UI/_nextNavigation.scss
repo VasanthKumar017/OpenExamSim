@@ -1,0 +1,49 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.controls {
+  display: flex;
+  justify-content: space-between; // Pushes buttons to opposite ends
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+
+  .primary-btn {
+    // Safety net: pushes to the right even if 'Previous' is hidden
+    margin-left: auto; 
+    background-color: $primary-blue;
+    color: white;
+    border: none;
+    
+    &:hover {
+      background-color: color.adjust($primary-blue, $lightness: -10%);
+    }
+  }
+
+  .secondary-btn {
+    background-color: white;
+    color: $text-dark;
+    border: 1px solid #cbd5e0;
+
+    &:hover {
+      background-color: #f8fafc;
+    }
+  }
+
+  // Shared button styles
+  button {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:disabled {
+      background-color: #f1f5f9;
+      color: #94a3b8;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+    }
+  }
+}
