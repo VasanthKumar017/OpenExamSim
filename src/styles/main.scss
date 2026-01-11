@@ -1,0 +1,46 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+body {
+  background-color: $background-gray;
+  color: $text-dark;
+  font-family: 'Inter', sans-serif;
+}
+
+.exam-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+
+  .question-area {
+    flex: 1;
+    background: white;
+    padding: 2.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow-sm;
+
+    h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .option-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: $border-radius;
+    transition: all $transition-speed ease;
+
+    &:hover {
+      border-color: $primary-blue;
+    }
+
+    &.selected {
+      background-color: color.adjust($primary-blue, $lightness: 45%);
+      border-color: $primary-blue;
+    }
+  }
+}

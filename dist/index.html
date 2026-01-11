@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenExamSim</title>
+    <script type="module" crossorigin src="/assets/index-CSfq4Rqe.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/__federation_expose_Engine-C9wQYdgl.js">
+    <link rel="modulepreload" crossorigin href="/assets/__federation_expose_Renderer-Cqn3o6Ya.js">
+    <link rel="stylesheet" crossorigin href="/assets/style-CA1IsHNe.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="exam-header">
+        <div class="logo">OpenExamSim</div>
+        <div id="timer" class="timer">Time Remaining: --:--</div>
+      </header>
+
+      <main class="exam-layout">
+        <aside class="question-nav">
+          <h3>Questions</h3>
+          <div id="nav-grid" class="nav-grid"></div>
+        </aside>
+
+        <section class="question-area">
+          <div id="question-container">
+            <h2 id="q-text">Loading...</h2>
+            <div id="options-container"></div>
+          </div>
+          
+          <footer class="controls">
+            <button id="prev-btn" class="secondary-btn">Previous</button>
+            <button id="next-btn" class="primary-btn">Next</button>
+          </footer>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

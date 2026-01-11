@@ -1,0 +1,38 @@
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: "Inter", sans-serif;
+}
+
+.exam-layout {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+.exam-layout .question-area {
+  flex: 1;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.exam-layout .question-area h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+.exam-layout .option-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.exam-layout .option-card:hover {
+  border-color: #2563eb;
+}
+.exam-layout .option-card.selected {
+  background-color: rgb(247.2142857143, 249.4285714286, 254.2857142857);
+  border-color: #2563eb;
+}
