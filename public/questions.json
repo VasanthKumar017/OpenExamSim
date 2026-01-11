@@ -2,25 +2,981 @@
   {
     "id": 1,
     "text": "PL No. of an item is 29731057. This item may be an item of:",
+    "options": ["Stationery", "Electric Locomotive", "Electrical item", "Diesel Locomotive"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 2,
+    "text": "Check digit in a PL No. for an item appearing at SL No. 181 in sub group 02 in Main Group 00 will be:",
+    "options": ["8", "5", "3", "7"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 3,
+    "text": "An item not issued for past 26 months but likely to be issued in next 22 months is classified as:",
+    "options": ["Dead surplus", "Movable surplus", "Custody stores", "Imprest stores"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 4,
+    "text": "Inactive items are those stock items which:",
     "options": [
-      "Stationery",
-      "Electric Locomotive",
-      "Electrical item",
-      "Diesel Locomotive"
+      "Are unserviceable",
+      "Are more than 3 months old",
+      "Have not been issued to any user for past 12 months",
+      "Are more than requirement of next 24 months"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 5,
+    "text": "Items not required by the user can be returned on:",
+    "options": [
+      "Advice note for returned stores",
+      "Minus issue note",
+      "Requisition",
+      "Indent"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 6,
+    "text": "Ordinary scrap items are those items which are:",
+    "options": [
+      "Of no use in the railway",
+      "Retained for railway use",
+      "Sold to staff",
+      "Sold by public auction"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 7,
+    "text": "Requisition and issue note combined form number is:",
+    "options": ["S-712", "S-1313", "S-1539", "S-764"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 8,
+    "text": "In e-Auction sale, the sale is allotted to the bidder having rate more than RP:",
+    "options": ["Highest", "Lowest", "Randomly", "Lottery"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 9,
+    "text": "Full form of PAC in tender context is:",
+    "options": [
+      "Public Accounts Certificate",
+      "Proprietary Article Certificate",
+      "Public Article Certificate",
+      "Peoples Action Committee"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 10,
+    "text": "In ABC analysis, what does 'A' stand for?",
+    "options": [
+      "Few items but highest inventory value",
+      "Many items but lowest inventory value",
+      "Items starting with letter A",
+      "One highest value item"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 11,
+    "text": "In VED analysis, 'V' stands for:",
+    "options": ["Vital items", "Very essential items", "Very excess items", "Very high value items"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 12,
+    "text": "Why are ABC and VED analysis important?",
+    "options": [
+      "Better inventory management",
+      "Improve financial performance",
+      "Enhance service level and profits",
+      "All of the above"
     ],
     "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
-    "id": 11,
-    "text": "In 'ABC analysis', what does 'A' stand for in inventory control?",
+    "id": 13,
+    "text": "An item not issued for past 24 months and not likely to be issued is classified as:",
+    "options": ["Dead surplus", "Movable surplus", "Custody stores", "Imprest stores"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 14,
+    "text": "TOR is a measure of:",
+    "options": ["Inventory control", "Average accountal time", "Tender settlement time", "Turn over radius"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 15,
+    "text": "CRAC in GeM contracts stands for:",
     "options": [
-      "Few items in nos. but of highest of value of existing inventory",
-      "Many items in nos. but of lowest of value of existing inventory",
-      "Items starting with 'A' in their name",
-      "One item of highest value of inventory"
+      "Consignee Receipt & Acceptance Certificate",
+      "Consignee Record Cancellation Certificate",
+      "Consignment Receipt and Challan",
+      "None of the above"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 16,
+    "text": "Emergency stores are those items which are:",
+    "options": [
+      "Not readily available",
+      "Required only in emergencies",
+      "Having no regular turnover",
+      "All of the above"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 17,
+    "text": "Main group 62 of PL number denotes:",
+    "options": [
+      "Electrical items",
+      "Hardware items",
+      "Engineering plant machinery & parts",
+      "Carriage & wagon components"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 18,
+    "text": "Unit code of set is:",
+    "options": ["04", "03", "02", "09"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 19,
+    "text": "Unit code of kilogram is:",
+    "options": ["01", "02", "03", "13"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 20,
+    "text": "Unit code of meter is:",
+    "options": ["11", "21", "31", "22"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 21,
+    "text": "5 R’s of material management stand for:",
+    "options": [
+      "Right place, quality, price, quantity and time",
+      "Right shape, bank, man, day and merchant",
+      "Right OEM, tender, forecasting, stock, EOQ",
+      "Right PO, delivery, inspection, FOR, bank"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 22,
+    "text": "Proof of dispatch for material sent by road is:",
+    "options": ["Lorry receipt", "Supplier challan", "Railway receipt", "None"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 23,
+    "text": "Stock items are those which are:",
+    "options": [
+      "Regularly required",
+      "Unit cost justifies inventory cost",
+      "Have standard nomenclature",
+      "All of the above"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 24,
+    "text": "Ultimate authority for acceptance or rejection of material is:",
+    "options": ["Consignee", "RITES", "RDSO", "GM"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 25,
+    "text": "CO7 register is visible in:",
+    "options": ["iMMS", "UDM", "IPAS", "UVAM"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 26,
+    "text": "Which of the following is considered while calculating PVC?",
+    "options": [
+      "Date of invoice, date of extended delivery period and inspection certificate",
+      "Date of lorry receipt, date of weighment and delivery",
+      "Date of inspection certificate, original delivery period and actual delivery",
+      "None of the above"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 27,
+    "text": "While submitting bids, responsibility of quoting correct GST rate and HSN code lies with:",
+    "options": [
+      "Purchaser",
+      "Bidder",
+      "Accounts department",
+      "Tender committee"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 28,
+    "text": "Stock items are those which are:",
+    "options": [
+      "Regularly and frequently required",
+      "Unit cost justifies inventory cost",
+      "Standardized and stocked in stores",
+      "All of the above"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 29,
+    "text": "Which document is prepared by stock verifier in Form S-1260?",
+    "options": [
+      "Price ledger sheet",
+      "Stock sheet",
+      "Special letter",
+      "Audit sheet"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 30,
+    "text": "CO7 register is visible in which system?",
+    "options": ["iMMS", "UDM", "IPAS", "UVAM"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 31,
+    "text": "The person authorized to inspect stores under a contract is called:",
+    "options": [
+      "Purchase officer",
+      "Accounts officer",
+      "Welfare inspector",
+      "Inspecting officer"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 32,
+    "text": "In case of imported consignment, Bill of Lading is similar to:",
+    "options": [
+      "Railway receipt",
+      "Letter of credit",
+      "Bill of entry",
+      "None of the above"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 33,
+    "text": "Warranty period as per IRS conditions of contract is:",
+    "options": [
+      "18/12 months",
+      "30/24 months",
+      "36/30 months",
+      "Not specified"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 34,
+    "text": "Who is authorized to post write-back issue notes in iMMS?",
+    "options": [
+      "Ward keeper",
+      "Depot officer",
+      "Ledger clerk",
+      "CDMS/G"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 35,
+    "text": "Which class of digital signature certificate is required for bidders?",
+    "options": ["Class-I", "Class-II", "Class-III", "Class-IV"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 36,
+    "text": "Time from demand registration to availability of item is called:",
+    "options": [
+      "Availability time",
+      "Buffer time",
+      "Lead time",
+      "Recoupment time"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 37,
+    "text": "SINT used in inter depot transfer stands for:",
+    "options": [
+      "Stores in transit",
+      "Stock in transit",
+      "Stock in transfer",
+      "Stores in transfer"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 38,
+    "text": "Ambiguity in material description will have what effect on lead time?",
+    "options": [
+      "Increase",
+      "Decrease",
+      "Remain same",
+      "No effect"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 39,
+    "text": "UDM stands for:",
+    "options": [
+      "User depot module",
+      "User divisional module",
+      "Universal depot module",
+      "Unified divisional module"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 40,
+    "text": "Validity of RITES inspection certificate is:",
+    "options": ["15 days", "21 days", "30 days", "45 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 41,
+    "text": "Scrap is NOT disposed by:",
+    "options": [
+      "Tender sale",
+      "Sale to employees",
+      "Direct handover to shipping companies",
+      "Public auction"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 42,
+    "text": "Main group 77 of PL normally deals with:",
+    "options": ["Paints", "Scrap", "Bearings", "Engineering M&P"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 43,
+    "text": "Incoterm FOB stands for:",
+    "options": [
+      "Free on Board",
+      "Freight on Board",
+      "Free of Book",
+      "Freight of Book"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 44,
+    "text": "Generally wagon items fall under which main group?",
+    "options": ["10–19", "20–29", "31–35", "37–39"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 45,
+    "text": "If closing balance is 20 and issues are 100, TOR percentage is:",
+    "options": ["20", "80", "100", "120"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 46,
+    "text": "Inter Railway Transfer Note in iMMS refers to:",
+    "options": [
+      "Sale issue note",
+      "Book transfer",
+      "Depot transfer",
+      "Employee transfer"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 47,
+    "text": "Fund for procurement of forklift on replacement basis is charged to:",
+    "options": ["DRF", "NDRF", "Capital fund", "CISF"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 48,
+    "text": "Maximum rejection period for pre-inspected material at consignee end is:",
+    "options": ["30 days", "45 days", "60 days", "90 days"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 49,
+    "text": "Free delivery period without ground rent in auction is:",
+    "options": ["20 days", "40 days", "60 days", "65 days"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 50,
+    "text": "Which scrap items can be condemned by survey committee?",
+    "options": [
+      "Nut and bolt",
+      "MS sheet",
+      "Empty drum",
+      "All of the above"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 51,
+    "text": "EOQ is the quantity at which:",
+    "options": [
+      "Inventory carrying cost is maximum",
+      "Warehousing cost is minimum",
+      "Carrying plus ordering cost is maximum",
+      "Carrying plus ordering cost is minimum"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 52,
+    "text": "In a rate contract:",
+    "options": [
+      "Quantity is not specified",
+      "Delivery period is not specified",
+      "Rough estimate of quantity is given",
+      "Quantity is fixed"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 53,
+    "text": "Open tender is adopted when purchase value exceeds:",
+    "options": [
+      "10 lakhs",
+      "15 lakhs",
+      "20 lakhs",
+      "25 lakhs"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 54,
+    "text": "Tender committee is required when purchase value exceeds:",
+    "options": [
+      "20 lakhs",
+      "30 lakhs",
+      "40 lakhs",
+      "50 lakhs"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 55,
+    "text": "Minimum local content for Class-I local supplier is:",
+    "options": ["0%", "20%", "50%", "100%"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 56,
+    "text": "In GeM purchases, CRAC stands for:",
+    "options": [
+      "Consignee Receipt Acceptance Certificate",
+      "Consignee Rejection Advice Certificate",
+      "Consignee Receipt Agreement Certificate",
+      "None of the above"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 57,
+    "text": "Who generates contract on GeM?",
+    "options": ["Consignee", "Buyer", "PAO", "DDO"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 58,
+    "text": "Direct buying on GeM is permitted up to:",
+    "options": [
+      "₹25,000",
+      "₹5,00,000",
+      "₹30,00,000",
+      "Above ₹30,00,000"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 59,
+    "text": "Bid security in GeM is exempted for:",
+    "options": [
+      "Micro and Small Enterprises",
+      "Registered suppliers",
+      "Both of the above",
+      "None"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 60,
+    "text": "GeM stands for:",
+    "options": [
+      "Goods and Machines",
+      "Government Money",
+      "Government e-Market",
+      "Goods e-Market"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 61,
+    "text": "GeM is used for:",
+    "options": [
+      "Sale of scrap",
+      "Purchase of scrap",
+      "Purchase of goods only",
+      "Purchase of goods and services"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 62,
+    "text": "Minimum qualification for Level-I recruitment in Railways is:",
+    "options": ["10th pass", "10+2", "8th pass", "Degree"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 63,
+    "text": "RTI Act information should normally be provided within:",
+    "options": ["15 days", "30 days", "45 days", "60 days"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 64,
+    "text": "Fee for RTI application is:",
+    "options": ["₹20", "₹50", "₹100", "₹10"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 65,
+    "text": "Maximum penalty under RTI Act is:",
+    "options": [
+      "₹5,000",
+      "₹10,000",
+      "₹20,000",
+      "₹25,000"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 66,
+    "text": "RTI Act derives authority from which Article?",
+    "options": ["Article 14", "Article 19", "Article 20", "Article 21"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 67,
+    "text": "Who can revoke an order of suspension?",
+    "options": [
+      "Junior scale officer",
+      "Senior scale officer",
+      "Authority who ordered suspension or higher",
+      "None"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 68,
+    "text": "Inquiry is not necessary in case of:",
+    "options": [
+      "Intoxication",
+      "Conviction on criminal charges",
+      "Misbehavior",
+      "Misuse of railway property"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 69,
+    "text": "Maximum accumulation of LAP is:",
+    "options": ["120 days", "180 days", "240 days", "300 days"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 70,
+    "text": "Child Care Leave can be granted up to:",
+    "options": ["365 days", "540 days", "730 days", "180 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 71,
+    "text": "Paternity leave admissible to male railway servant is:",
+    "options": ["10 days", "20 days", "15 days", "25 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 72,
+    "text": "Maximum LAP that can be encashed after retirement is:",
+    "options": ["240 days", "280 days", "300 days", "315 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 73,
+    "text": "RTI Act is applicable to:",
+    "options": [
+      "Private companies",
+      "NGOs",
+      "Public authorities",
+      "Political parties"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 74,
+    "text": "Second appeal under RTI lies with:",
+    "options": [
+      "District court",
+      "High court",
+      "Central/State Information Commission",
+      "Supreme court"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 75,
+    "text": "Rashtriya Ekta Diwas is celebrated on:",
+    "options": [
+      "2 October",
+      "15 August",
+      "31 October",
+      "26 January"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 76,
+    "text": "Anti-terrorism day is observed on:",
+    "options": ["30 January", "31 May", "2 October", "8 June"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 77,
+    "text": "What is the maximum joining time admissible to a Railway servant?",
+    "options": ["15 days", "12 days", "10 days", "16 days"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 78,
+    "text": "Maximum special casual leave admissible in a calendar year for scouting/sports activities is:",
+    "options": ["30 days", "45 days", "15 days", "25 days"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 79,
+    "text": "A kind of leave once sanctioned can be altered at written request of employee within:",
+    "options": ["20 days", "15 days", "30 days", "10 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 80,
+    "text": "Reduction of LAP credit due to EOL/absence is subject to a maximum of:",
+    "options": ["15 days", "10 days", "20 days", "30 days"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 81,
+    "text": "Additional special casual leave for employees with disabilities in a calendar year is:",
+    "options": ["12 days", "10 days", "4 days", "15 days"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 82,
+    "text": "Railway Service Conduct Rules, 1966 are applicable to:",
+    "options": [
+      "Only gazetted officers",
+      "Only Group D employees",
+      "Only non-gazetted staff",
+      "All gazetted and non-gazetted employees"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 83,
+    "text": "Procedure of minor penalty under Railway Servants (D&A) Rules is prescribed under:",
+    "options": ["Rule 7", "Rule 9", "Rule 11", "Rule 13"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 84,
+    "text": "Standard Form used for issuing a major penalty chargesheet is:",
+    "options": ["SF2", "SF5", "SF7", "SF10"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 85,
+    "text": "Competent authority to impose compulsory retirement or dismissal is:",
+    "options": [
+      "Controlling officer",
+      "Disciplinary authority",
+      "Appointing authority",
+      "None of the above"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 86,
+    "text": "Time limit for submission of appeal against penalty under D&A Rules is:",
+    "options": ["30 days", "45 days", "60 days", "72 days"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 87,
+    "text": "Disciplinary authority while imposing penalty must pass:",
+    "options": [
+      "Penalty orders",
+      "Speaking orders",
+      "Judicial orders",
+      "None of these"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 88,
+    "text": "Pending D&AR case in case of death of Railway servant should be:",
+    "options": [
+      "Continued and finalized",
+      "Sent to Board",
+      "Sent to GM",
+      "Closed"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 89,
+    "text": "Reduction to a lower stage in pay without cumulative effect up to 3 years is a:",
+    "options": [
+      "Major penalty",
+      "Minor penalty",
+      "Both",
+      "None"
+    ],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 90,
+    "text": "Railway employee deemed suspended if in police custody exceeding:",
+    "options": ["24 hours", "48 hours", "72 hours", "96 hours"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 91,
+    "text": "Review of suspension cases is done after:",
+    "options": [
+      "3 months",
+      "2 months",
+      "4 months",
+      "No review required"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 92,
+    "text": "Inquiry is not mandatory under D&A Rules in which rule?",
+    "options": ["Rule 5", "Rule 13", "Rule 14(ii)", "None"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 93,
+    "text": "Show cause notice is required when penalty is to be:",
+    "options": [
+      "Enhanced",
+      "Reduced",
+      "Upheld",
+      "Withdrawn"
+    ],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 94,
+    "text": "RTI application language can be:",
+    "options": [
+      "English only",
+      "Hindi only",
+      "Regional language only",
+      "Any of the above"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 95,
+    "text": "First appeal under RTI should be disposed within:",
+    "options": ["40 days", "30 days", "60 days", "50 days"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 96,
+    "text": "RTI Act gives right to seek information from:",
+    "options": [
+      "Private companies",
+      "MNCs",
+      "Public authorities",
+      "Political parties"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 97,
+    "text": "Maximum monetary penalty under RTI Act is:",
+    "options": [
+      "₹5,000",
+      "₹10,000",
+      "₹20,000",
+      "₹25,000"
+    ],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 98,
+    "text": "Rashtriya Ekta Diwas is celebrated as birth anniversary of:",
+    "options": [
+      "Mahatma Gandhi",
+      "Jawaharlal Nehru",
+      "Sardar Vallabhbhai Patel",
+      "Subhash Chandra Bose"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 99,
+    "text": "Anti-corruption day in India is observed on:",
+    "options": [
+      "31 October",
+      "30 January",
+      "9 December",
+      "15 August"
+    ],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 100,
+    "text": "Anti-terrorism day in India is observed on:",
+    "options": [
+      "31 May",
+      "30 January",
+      "2 October",
+      "8 June"
     ],
     "correctAnswer": 0,
     "type": "multiple-choice"
   }
 ]
+
