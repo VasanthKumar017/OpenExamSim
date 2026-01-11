@@ -9,6 +9,17 @@
   padding-top: 1.5rem;
   border-top: 1px solid #e2e8f0;
 
+  #submission-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; // Allows it to grow and push buttons to the sides
+  }
+
+  .primary-btn, .secondary-btn {
+    min-width: 120px;
+  }
+
   .primary-btn {
     // Safety net: pushes to the right even if 'Previous' is hidden
     margin-left: auto; 
