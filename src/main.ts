@@ -9,6 +9,7 @@ import { Timer } from './components/Timer'; // Import our new component
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
     const useTimer = true; 
+    const exTime = 1 * 60; // 10 * 60 = 10 minutes in seconds
 
     try {
         const questions = await fetchExamData();
@@ -37,7 +38,7 @@ async function startApp() {
         // --- TIMER INITIALIZATION ---
 
             if (useTimer) {
-                examTimer = new Timer(3600, () => { /* ... */ });
+                examTimer = new Timer(exTime, () => { /* ... */ });
                 examTimer.start();
             } else {
                 // Optional: Hide the timer element if not being used

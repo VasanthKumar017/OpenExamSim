@@ -137,16 +137,19 @@ class ResultsRenderer {
 
 class Timer {
   timeLeft;
+  totalTime;
   intervalId = null;
   element = null;
   onTimeUp;
   constructor(durationSeconds, onTimeUp) {
+    this.totalTime = durationSeconds;
     this.timeLeft = durationSeconds;
     this.onTimeUp = onTimeUp;
     this.element = document.getElementById("timer");
   }
   start() {
     if (!this.element) return;
+    this.element.classList.add("timer-normal");
     this.updateDisplay();
     this.intervalId = window.setInterval(() => {
       this.timeLeft--;
@@ -158,20 +161,18 @@ class Timer {
     }, 1e3);
   }
   stop() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+    if (this.intervalId) clearInterval(this.intervalId);
   }
   updateDisplay() {
-    if (this.element) {
-      const mins = Math.floor(this.timeLeft / 60);
-      const secs = this.timeLeft % 60;
-      const timeString = `${mins}:${secs.toString().padStart(2, "0")}`;
-      this.element.innerText = `Time Remaining: ${timeString}`;
-      if (this.timeLeft < 300) {
-        this.element.classList.add("timer-low");
-      }
+    if (!this.element) return;
+    const mins = Math.floor(this.timeLeft / 60);
+    const secs = this.timeLeft % 60;
+    const timeString = `${mins}:${secs.toString().padStart(2, "0")}`;
+    this.element.innerText = `Time Remaining: ${timeString}`;
+    const threshold = this.totalTime * 0.1;
+    if (this.timeLeft <= threshold) {
+      this.element.classList.remove("timer-normal");
+      this.element.classList.add("timer-low");
     }
   }
 }
@@ -179,6 +180,7 @@ class Timer {
 async function startApp() {
   const appContainer = document.querySelector("#app");
   const useTimer = true;
+  const exTime = 3600;
   try {
     const questions = await fetchExamData();
     const engine = new ExamEngine(questions);
@@ -198,7 +200,7 @@ async function startApp() {
       }
     };
     if (useTimer) {
-      examTimer = new Timer(3600, () => {
+      examTimer = new Timer(exTime, () => {
       });
       examTimer.start();
     }

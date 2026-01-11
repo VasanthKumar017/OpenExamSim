@@ -4,22 +4,29 @@
   background: #f1f5f9;
   padding: 0.5rem 1rem;
   border-radius: 6px;
+  transition: all 0.3s ease;
   color: #475569;
   border: 1px solid #e2e8f0;
   min-width: 200px;
   text-align: center;
 
+  &.timer-normal {
+    color: #059669;      // Professional Green
+    background: #ecfdf5; // Very light green bg
+    border-color: #a7f3d0;
+  }
+
   // Blinking red effect for low time
   &.timer-low {
-    color: #e11d48;
-    background: #fff1f2;
-    border-color: #fda4af;
-    animation: pulse 2s infinite;
+    color: #dc2626;      // Professional Red
+    background: #fef2f2; // Very light red bg
+    border-color: #fecaca;
+    animation: blink 1s infinite;
   }
 }
 
 @keyframes pulse {
   0% { opacity: 1; }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.8; }
   100% { opacity: 1; }
 }
