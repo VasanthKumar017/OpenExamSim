@@ -14,28 +14,35 @@ export class QuestionRenderer {
         this.container.innerHTML = ''; // Clear previous options
 
         question.options.forEach((option, index) => {
-            const button = document.createElement('div');
-            button.className = 'option-card';
+            const card = document.createElement('div');
+            card.className = 'option-card';
             
-            // Check if this option was previously selected
+            // Logic to check if this specific index is selected
             const isSelected = Array.isArray(currentAnswer) 
                 ? currentAnswer.includes(index) 
                 : currentAnswer === index;
 
-            if (isSelected) button.classList.add('selected');
+            if (isSelected) card.classList.add('selected');
 
-            button.innerHTML = `
-                <span class="option-label">${String.fromCharCode(65 + index)}</span>
+            // Added the radio input here
+            card.innerHTML = `
+                <div class="radio-wrapper">
+                    <input type="radio" 
+                           name="question-${question.id}" 
+                           ${isSelected ? 'checked' : ''} 
+                           class="option-radio">
+                </div>
+                <span class="option-label-letter">${String.fromCharCode(65 + index)}.</span>
                 <span class="option-text">${option}</span>
             `;
 
-            button.onclick = () => this.handleSelection(index, question.type);
-            this.container.appendChild(button);
+            // Make the whole card clickable
+            card.onclick = () => this.handleSelection(index, question.type);
+            this.container.appendChild(card);
         });
     }
 
     private handleSelection(index: number, type: 'multiple-choice' | 'checkbox') {
-        // We will emit an event or call a callback to update the Engine state
         const event = new CustomEvent('answer-selected', { 
             detail: { index, type } 
         });

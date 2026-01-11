@@ -1,6 +1,6 @@
 /* empty css                                    */
 import { ExamEngine } from './__federation_expose_Engine-C9wQYdgl.js';
-import { QuestionRenderer } from './__federation_expose_Renderer-Cqn3o6Ya.js';
+import { QuestionRenderer } from './__federation_expose_Renderer-Dqk9uT_7.js';
 
 true&&(function polyfill() {
   const relList = document.createElement("link").relList;
