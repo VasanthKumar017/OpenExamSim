@@ -15,10 +15,14 @@ async function startApp() {
     const useTimer = true;
     const exTime = 60 * 60; // 60 minutes
 
-    // --- HELPER: SAVE TO LOCAL STORAGE ---
-    const saveProgress = (engine: ExamEngine) => {
+    // --- HELPER: SAVE TO LOCAL STORAGE (Now includes Timer) ---
+    const saveProgress = (engine: ExamEngine, timer?: Timer | null) => {
         const state = engine.getState();
-        localStorage.setItem('exam_progress', JSON.stringify(state));
+        const dataToSave = {
+            engineState: state,
+            timeLeft: timer ? timer.getTimeLeft() : null // Save the current seconds left
+        };
+        localStorage.setItem('exam_progress', JSON.stringify(dataToSave));
     };
 
     try {
@@ -29,15 +33,21 @@ async function startApp() {
         const submission = new SubmissionController(engine);
 
         let examTimer: Timer | null = null;
+        let initialSeconds: number | undefined;
 
         // --- LOAD SESSION ON START --- 
         const saved = localStorage.getItem('exam_progress');
         if (saved) {
-            const parsedState = JSON.parse(saved);
-            // Ensure loadState exists in your engine.ts
-            if (typeof (engine as any).loadState === 'function') {
-                (engine as any).loadState(parsedState);
+            const parsed = JSON.parse(saved);
+            
+            // Load Engine State
+            if (parsed.engineState && typeof (engine as any).loadState === 'function') {
+                (engine as any).loadState(parsed.engineState);
             }
+            
+            // Load Timer State
+            initialSeconds = parsed.timeLeft;
+            
             startScreen.classList.add('hidden');
         }
 
@@ -67,23 +77,31 @@ async function startApp() {
             }
         };
 
+        // --- INITIALIZE TIMER (With potential saved time) ---
         if (useTimer) {
             examTimer = new Timer(exTime, () => {
                 alert("Time is up!");
-                localStorage.removeItem('exam_progress'); // Clear on expiration
+                localStorage.removeItem('exam_progress');
                 resultsView.render(engine.getQuestions(), engine.getState().answers);
-            });
+            }, initialSeconds); // The third argument uses the saved time
         }
 
         // --- NAVIGATION & SUBMISSION ---
         setupNavigation(engine, () => {
             updateUI();
-            saveProgress(engine); // SAVE: When moving between questions
+            saveProgress(engine, examTimer); 
         }, () => {
             if (examTimer) examTimer.stop();
-            localStorage.removeItem('exam_progress'); // CLEAR: When exam finished
+            localStorage.removeItem('exam_progress'); 
             resultsView.render(engine.getQuestions(), engine.getState().answers);
         });
+
+        // --- HEARTBEAT: Save time every 5 seconds ---
+        setInterval(() => {
+            if (examTimer && !startScreen.classList.contains('hidden')) {
+                saveProgress(engine, examTimer);
+            }
+        }, 5000);
 
         // --- START BUTTON LOGIC ---
         startBtn.addEventListener('click', () => {
@@ -107,11 +125,10 @@ async function startApp() {
 
             submission.renderLockBtn(index, () => {
                 updateNavigationUI();
-                saveProgress(engine); // SAVE: When an answer is confirmed
+                saveProgress(engine, examTimer); 
             });
         });
 
-        // If resuming a saved session, render immediately
         if (saved) {
             if (useTimer && examTimer) examTimer.start();
             updateUI();
@@ -122,7 +139,5 @@ async function startApp() {
         console.error(error);
     }
 }
-
-
 
 startApp();

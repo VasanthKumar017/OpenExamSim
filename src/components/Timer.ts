@@ -5,17 +5,22 @@ export class Timer {
     private element: HTMLElement | null = null;
     private onTimeUp: () => void;
 
-    constructor(durationSeconds: number, onTimeUp: () => void) {
+    // Corrected: Only ONE constructor implementation
+    constructor(durationSeconds: number, onTimeUp: () => void, startTime?: number) {
         this.totalTime = durationSeconds;
-        this.timeLeft = durationSeconds;
+        // Uses startTime from localStorage if it exists, otherwise starts from the beginning
+        this.timeLeft = startTime !== undefined ? startTime : durationSeconds;
         this.onTimeUp = onTimeUp;
         this.element = document.getElementById('timer');
+        
+        // Update display immediately so the user doesn't see "00:00" while waiting
+        this.updateDisplay();
     }
 
     public start() {
         if (!this.element) return;
+        if (this.intervalId) return; // Prevent multiple timers from running at once
         
-        // Initial color state
         this.element.classList.add('timer-normal');
         this.updateDisplay();
 
@@ -31,7 +36,14 @@ export class Timer {
     }
 
     public stop() {
-        if (this.intervalId) clearInterval(this.intervalId);
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+    }
+
+    public getTimeLeft(): number {
+        return this.timeLeft;
     }
 
     private updateDisplay() {
@@ -42,7 +54,6 @@ export class Timer {
         const timeString = `${mins}:${secs.toString().padStart(2, '0')}`;
         this.element.innerText = `Time Remaining: ${timeString}`;
 
-        // Calculate 10% threshold
         const threshold = this.totalTime * 0.1;
 
         if (this.timeLeft <= threshold) {
