@@ -17,13 +17,13 @@
 
         &:disabled {
             background-color: #f1f5f9;
-            color: #94a3b8;
+            color: #000000;
             cursor: not-allowed;
         }
 
         &.locked {
-            background-color: #059669;
-            box-shadow: 0 0 10px rgba(5, 150, 105, 0.3);
+            background-color: #ffffff;
+            // box-shadow: 0 0 10px rgba(5, 150, 105, 0.3);
         }
     }
 }
