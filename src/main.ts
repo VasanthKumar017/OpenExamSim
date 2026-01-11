@@ -9,6 +9,9 @@ import { SubmissionController } from './components/Submission';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
+    const startScreen = document.getElementById('start-screen')!;
+    const startBtn = document.getElementById('start-btn')!;
+    
     const useTimer = true;
     const exTime = 60 * 60; // 60 minutes
 
@@ -43,13 +46,12 @@ async function startApp() {
             }
         };
 
-        // --- TIMER INITIALIZATION ---
+        // --- PREPARE TIMER (But don't start yet) ---
         if (useTimer) {
             examTimer = new Timer(exTime, () => {
                 alert("Time is up!");
                 resultsView.render(engine.getQuestions(), engine.getState().answers);
             });
-            examTimer.start();
         } else {
             const tElement = document.getElementById('timer');
             if (tElement) tElement.style.display = 'none';
@@ -61,11 +63,24 @@ async function startApp() {
             resultsView.render(engine.getQuestions(), engine.getState().answers);
         });
 
+        // --- START BUTTON LOGIC ---
+        startBtn.addEventListener('click', () => {
+            // Hide the overlay
+            startScreen.classList.add('hidden');
+            
+            // Start the timer
+            if (useTimer && examTimer) {
+                examTimer.start();
+            }
+
+            // Show the first question
+            updateUI();
+        });
+
         // --- EVENT LISTENERS ---
         window.addEventListener('answer-selected', (e: Event) => {
             const { index } = (e as CustomEvent).detail;
 
-            // Highlight the selected card visually
             const allOptions = document.querySelectorAll('.option-card');
             allOptions.forEach(card => card.classList.remove('selected'));
 
@@ -76,13 +91,10 @@ async function startApp() {
                 if (radio) radio.checked = true;
             }
 
-            // Render Lock-In button and call helper on confirm
             submission.renderLockBtn(index, () => {
-                updateNavigationUI(); // Function is now read and used!
+                updateNavigationUI();
             });
         });
-
-        updateUI();
 
     } catch (error) {
         appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
