@@ -63,4 +63,12 @@ export class ExamEngine {
     public handleAnswer(answerIndex: number | number[]): void {
         this.state.answers[this.state.currentIdx] = answerIndex;
     }
+
+    /**
+     * Marks the exam as submitted.
+     */
+    public submit(): void {
+        this.state.isSubmitted = true;
+        // You can also stop a timer here if you have one
+    }
 }

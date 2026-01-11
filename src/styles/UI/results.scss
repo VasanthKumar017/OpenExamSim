@@ -1,0 +1,136 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.results-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .results-summary {
+    text-align: center;
+    background: white;
+    padding: 3rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow-sm;
+    margin-bottom: 2.5rem;
+
+    h1 {
+      color: $text-dark;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .score-badge {
+      display: inline-block;
+      font-size: 4rem;
+      font-weight: 800;
+      color: $primary-blue;
+      padding: 1rem 2rem;
+      border-bottom: 4px solid $primary-blue;
+      margin-bottom: 1rem;
+    }
+
+    .percentage {
+      font-size: 1.2rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .review-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow-sm;
+    border-left: 12px solid #cbd5e0; // Default gray
+
+    &.correct {
+      border-left-color: #48bb78; // Green
+      .status-icon { color: #48bb78; }
+    }
+
+    &.incorrect {
+      border-left-color: #f56565; // Red
+      .status-icon { color: #f56565; }
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #4a5568;
+
+      .status-icon {
+        font-size: 1.5rem;
+      }
+    }
+
+    .q-text {
+      font-size: 1.15rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .ans-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+
+      .ans-box {
+        padding: 1rem;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+
+        label {
+          display: block;
+          font-size: 0.75rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: #94a3b8;
+          margin-bottom: 0.5rem;
+        }
+
+        p {
+          margin: 0;
+          font-weight: 500;
+          color: $text-dark;
+        }
+
+        &.your-ans-box.wrong p {
+          color: #e53e3e;
+          text-decoration: line-through;
+        }
+
+        &.correct-ans-box p {
+          color: #2f855a;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+.restart-btn {
+  background-color: $primary-blue;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: $border-radius;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: color.adjust($primary-blue, $lightness: -10%);
+  }
+}

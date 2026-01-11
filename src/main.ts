@@ -3,7 +3,7 @@ import { ExamEngine } from './core/engine';
 import { QuestionRenderer } from './core/renderer';
 import { fetchExamData } from './core/data-loader';
 import { setupNavigation } from './components/Navigation';
-import { renderResults } from './components/Results';
+import { ResultsRenderer } from './components/ResultsRenderer';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
@@ -30,11 +30,21 @@ async function startApp() {
         };
 
         // Initialize our new Component logic
-        setupNavigation(
-            engine, 
-            updateUI, 
-            (score) => renderResults(appContainer, score, questions.length)
-        );
+// Inside main.ts
+const resultsView = new ResultsRenderer(); 
+
+setupNavigation(
+    engine, 
+    updateUI, 
+    () => {
+        // This is what happens when she clicks "Finish"
+        const state = engine.getState();
+        const questions = engine.getQuestions();
+        
+        // Pass the questions and the answers map
+        resultsView.render(questions, state.answers);
+    }
+);
 
         // Handle answer selection (stays in main for communication between Renderer and Engine)
         window.addEventListener('answer-selected', (e: Event) => {

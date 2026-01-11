@@ -1,5 +1,5 @@
 /* empty css                                    */
-import { ExamEngine } from './__federation_expose_Engine-C9wQYdgl.js';
+import { ExamEngine } from './__federation_expose_Engine-BTkBYK_r.js';
 import { QuestionRenderer } from './__federation_expose_Renderer-Dqk9uT_7.js';
 
 true&&(function polyfill() {
@@ -77,17 +77,63 @@ const setupNavigation = (engine, onUpdate, onFinish) => {
   });
 };
 
-const renderResults = (container, score, total) => {
-  container.innerHTML = `
-        <div class="results-card">
-            <h1>Exam Completed!</h1>
-            <p>You scored <strong>${score}</strong> out of <strong>${total}</strong></p>
-            <button onclick="window.location.reload()" class="restart-btn">
-                Restart Exam
-            </button>
-        </div>
-    `;
-};
+class ResultsRenderer {
+  container;
+  constructor() {
+    this.container = document.getElementById("app");
+  }
+  render(questions, userAnswers) {
+    let score = 0;
+    questions.forEach((q, index) => {
+      if (userAnswers[index] === q.correctAnswer) {
+        score++;
+      }
+    });
+    this.container.innerHTML = `
+            <div class="results-container">
+                <div class="results-summary">
+                    <h1>Performance Report</h1>
+                    <div class="score-badge">${score} / ${questions.length}</div>
+                    <p class="percentage">${(score / questions.length * 100).toFixed(1)}%</p>
+                    <button onclick="window.location.reload()" class="restart-btn">Try Again</button>
+                </div>
+
+                <div class="review-list">
+                    ${questions.map((q, index) => {
+      const userAnsIndex = userAnswers[index];
+      const isCorrect = userAnsIndex === q.correctAnswer;
+      return `
+                            <div class="review-item ${isCorrect ? "correct" : "incorrect"}">
+                                <div class="review-header">
+                                    <strong>Question ${index + 1}</strong>
+                                    <span class="status-icon">${isCorrect ? "✔" : "✘"}</span>
+                                </div>
+                                
+                                <p class="q-text">${q.text}</p>
+                                
+                                <div class="ans-comparison">
+                                    <div class="ans-box your-ans-box ${!isCorrect ? "wrong" : ""}">
+                                        <label>Your Choice</label>
+                                        <p>
+                                            ${userAnsIndex !== void 0 ? q.options[userAnsIndex] : "Skipped"}
+                                        </p>
+                                    </div>
+                                    
+                                    ${!isCorrect ? `
+                                        <div class="ans-box correct-ans-box">
+                                            <label>Correct Answer</label>
+                                            <p>${q.options[q.correctAnswer]}</p>
+                                        </div>
+                                    ` : ""}
+                                </div>
+                            </div>
+                        `;
+    }).join("")}
+                </div>
+            </div>
+        `;
+  }
+}
 
 async function startApp() {
   const appContainer = document.querySelector("#app");
@@ -107,10 +153,15 @@ async function startApp() {
         nextBtn.innerText = state.currentIdx === state.total - 1 ? "Finish Exam" : "Next";
       }
     };
+    const resultsView = new ResultsRenderer();
     setupNavigation(
       engine,
       updateUI,
-      (score) => renderResults(appContainer, score, questions.length)
+      () => {
+        const state = engine.getState();
+        const questions2 = engine.getQuestions();
+        resultsView.render(questions2, state.answers);
+      }
     );
     window.addEventListener("answer-selected", (e) => {
       const customEvent = e;

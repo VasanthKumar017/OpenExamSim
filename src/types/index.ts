@@ -2,7 +2,7 @@ export interface Question {
     id: number;
     text: string;
     options: string[];
-    correctAnswer: number | number[]; // Number for single choice, Array for checkboxes
+    correctAnswer: number // Number for single choice, Array for checkboxes
     type: 'multiple-choice' | 'checkbox';
 }
 
