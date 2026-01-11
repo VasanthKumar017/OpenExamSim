@@ -33,6 +33,11 @@ async function startApp() {
             const state = engine.getState();
             const currentQ = engine.getCurrentQuestion();
             const currentAns = state.answers[state.currentIdx];
+            const counterElement = document.getElementById('q-counter');
+
+            if (counterElement) {
+                counterElement.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
+            }
 
             renderer.render(currentQ, currentAns);
             submission.clear();

@@ -1,0 +1,14 @@
+@use '../variables' as *;
+
+.q-counter {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $primary-blue; // Using your brand blue
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background-color: rgba($primary-blue, 0.1);
+  border-radius: 4px;
+}
