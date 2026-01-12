@@ -1,36 +1,35 @@
-import { Question } from '../types';
+import { ExamEngine } from '../core/engine'; // We need the engine type now
 
 export class ResultsRenderer {
     private container: HTMLElement;
 
     constructor() {
-        // Targets the main 'app' div to clear the exam UI and show results
         this.container = document.getElementById('app')!;
     }
 
-    public render(questions: Question[], userAnswers: Record<number, number | number[]>) {
-        let score = 0;
-
-        // Calculate score
-        questions.forEach((q, index) => {
-            if ((userAnswers[index] as number) === (q.correctAnswer as number)) {
-                score++;
-            }
-        });
+    /**
+     * Renders the final performance report.
+     * Logic is now outsourced to the engine for consistency.
+     */
+    public render(engine: ExamEngine) {
+        // 1. Get the centralized math from the engine
+        const { score, total, percentage } = engine.calculateScore();
+        const questions = engine.getQuestions();
+        const userAnswers = engine.getState().answers;
 
         this.container.innerHTML = `
             <div class="results-container">
                 <div class="results-summary">
                     <h1>Performance Report</h1>
-                    <div class="score-badge">${score} / ${questions.length}</div>
-                    <p class="percentage">${((score / questions.length) * 100).toFixed(1)}%</p>
+                    <div class="score-badge">${score} / ${total}</div>
+                    <p class="percentage">${percentage}%</p>
                     <button onclick="window.location.reload()" class="restart-btn">Try Again</button>
                 </div>
 
                 <div class="review-list">
                     ${questions.map((q, index) => {
                         const userAnsIndex = userAnswers[index];
-                        const isCorrect = (userAnsIndex as number) === (q.correctAnswer as number);
+                        const isCorrect = userAnsIndex === q.correctAnswer;
 
                         return `
                             <div class="review-item ${isCorrect ? 'correct' : 'incorrect'}">
@@ -47,14 +46,14 @@ export class ResultsRenderer {
                                         <p>
                                             ${userAnsIndex !== undefined 
                                                 ? q.options[userAnsIndex as number] 
-                                                : 'Skipped'}
+                                                : '<span class="skipped">Skipped</span>'}
                                         </p>
                                     </div>
                                     
                                     ${!isCorrect ? `
                                         <div class="ans-box correct-ans-box">
                                             <label>Correct Answer</label>
-                                            <p>${q.options[q.correctAnswer as number]}</p>
+                                            <p>${q.options[q.correctAnswer]}</p>
                                         </div>
                                     ` : ''}
                                 </div>

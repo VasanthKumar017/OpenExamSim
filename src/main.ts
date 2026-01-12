@@ -66,7 +66,7 @@ async function startApp() {
         const finishExam = () => {
             if (examTimer) examTimer.stop();
             localStorage.removeItem('exam_progress');
-            resultsView.render(engine.getQuestions(), engine.getState().answers);
+            resultsView.render(engine);
             if (endTestBtn) endTestBtn.style.display = 'none';
         };
 

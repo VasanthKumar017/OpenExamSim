@@ -1,6 +1,6 @@
 import { ExamEngine } from '../core/engine';
 
-export const setupNavigation = (engine: ExamEngine, onUpdate: () => void, onFinish: (score: number) => void) => {
+export const setupNavigation = (engine: ExamEngine, onUpdate: () => void, onFinish: () => void) => {
     const nextBtn = document.getElementById('next-btn');
     const prevBtn = document.getElementById('prev-btn');
 
@@ -11,16 +11,11 @@ export const setupNavigation = (engine: ExamEngine, onUpdate: () => void, onFini
 
     nextBtn?.addEventListener('click', () => {
         const state = engine.getState();
-        const questions = engine.getQuestions();
 
-        // Logic to determine if we are Finishing or going Next
-        if (state.currentIdx === questions.length - 1) {
-            // Calculate Score
-            let score = 0;
-            questions.forEach((q, idx) => {
-                if (state.answers[idx] === q.correctAnswer) score++;
-            });
-            onFinish(score);
+        // Check if we are on the very last question
+        if (state.currentIdx === state.total - 1) {
+            // No math here! Just trigger the finish callback.
+            onFinish();
         } else {
             engine.next();
             onUpdate();
