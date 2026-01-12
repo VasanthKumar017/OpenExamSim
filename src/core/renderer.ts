@@ -17,16 +17,19 @@ export class QuestionRenderer {
         question.options.forEach((option, index) => {
             const card = document.createElement('div');
             
-            // Fix: Logic is now declared here, not in main.ts
+            // Checks if index is selected (works for both single number and array)
             const isSelected = Array.isArray(currentAnswer) 
                 ? currentAnswer.includes(index) 
                 : currentAnswer === index;
             
             card.className = `option-card ${isSelected ? 'selected' : ''}`;
 
+            // FIX: Use dynamic input type (checkbox vs radio)
+            const inputType = question.type === 'checkbox' ? 'checkbox' : 'radio';
+
             card.innerHTML = `
                 <div class="radio-wrapper">
-                    <input type="radio" 
+                    <input type="${inputType}" 
                            name="question-${question.id}" 
                            ${isSelected ? 'checked' : ''} 
                            class="option-radio">
@@ -41,6 +44,7 @@ export class QuestionRenderer {
     }
 
     private handleSelection(index: number, type: 'multiple-choice' | 'checkbox') {
+        // We emit the type so the Engine knows whether to toggle or replace
         eventBus.emit('answer-selected', { index, type });
     }
 }
