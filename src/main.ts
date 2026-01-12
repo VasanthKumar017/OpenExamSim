@@ -8,52 +8,61 @@ import { ResultsRenderer } from './components/ResultsRenderer';
 import { Timer } from './components/Timer';
 
 async function startApp() {
+    // 1. SELECT DOM ELEMENTS (Dependency Gathering)
+    // Only main.ts is allowed to "know" about these specific IDs
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
     const startScreen = document.getElementById('start-screen')!;
     const startBtn = document.getElementById('start-btn')!;
     const endTestBtn = document.getElementById('end-test-btn') as HTMLButtonElement;
+    const timerDisplay = document.getElementById('timer-display'); // For the Timer component
+    const qCounter = document.getElementById('q-counter'); // For the UI counter
 
     try {
-        // 1. Setup Core
+        // 2. INITIALIZE CORE
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
         const renderer = new QuestionRenderer();
-        const resultsView = new ResultsRenderer();
         
-        // 2. Load Session
+        // 3. INJECT DEPENDENCIES
+        // We pass the appContainer directly to the ResultsRenderer
+        const resultsView = new ResultsRenderer(appContainer);
+        
         const saved = SessionManager.load();
-        if (saved) {
-            if (saved.engineState) engine.loadState(saved.engineState);
-            startScreen.classList.add('hidden');
+        if (saved && saved.engineState) {
+            engine.loadState(saved.engineState);
         }
 
-        // 3. Setup Timer
-        const examTimer = new Timer(3600, () => finishExam(), saved?.timeLeft);
+        // We pass the timerDisplay element directly to the Timer
+        const examTimer = new Timer(
+            3600, 
+            () => finishExam(), 
+            saved?.timeLeft, 
+            timerDisplay
+        );
 
-        // 4. Centralized UI Updater
+        // 4. UI ORCHESTRATION
         const updateUI = () => {
             const state = engine.getState();
             renderer.render(engine.getCurrentQuestion(), state.answers[state.currentIdx]);
             
-            const counter = document.getElementById('q-counter');
-            if (counter) counter.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
+            if (qCounter) {
+                qCounter.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
+            }
             
             window.dispatchEvent(new Event('refresh-nav'));
         };
 
-        // 5. Define Finish Logic
         const finishExam = () => {
             examTimer.stop();
             SessionManager.clear();
             resultsView.render(engine);
             
-            // UI Clean up
             if (endTestBtn) endTestBtn.style.display = 'none';
             const controls = document.querySelector('.controls') as HTMLElement;
             if (controls) controls.style.display = 'none';
         };
 
-        // --- THE MISSING FIX: Attach the event listener ---
+        // 5. EVENT WIRING
         if (endTestBtn) {
             endTestBtn.addEventListener('click', () => {
                 if (confirm("Are you sure you want to end the test and see your results?")) {
@@ -62,10 +71,9 @@ async function startApp() {
             });
         }
 
-        // 6. Connect Events
         startBtn.addEventListener('click', () => {
             startScreen.classList.add('hidden');
-            if (endTestBtn) endTestBtn.style.display = 'block'; // Show button on start
+            if (endTestBtn) endTestBtn.style.display = 'block';
             examTimer.start();
             updateUI();
             SessionManager.startHeartbeat(engine, examTimer);
@@ -82,9 +90,10 @@ async function startApp() {
             SessionManager.save(engine, examTimer);
         }, finishExam);
 
-        // Bootstrap if resuming
+        // 6. BOOTSTRAP (If Resuming)
         if (saved) {
-            if (endTestBtn) endTestBtn.style.display = 'block'; // Show button on resume
+            startScreen.classList.add('hidden');
+            if (endTestBtn) endTestBtn.style.display = 'block';
             examTimer.start();
             updateUI();
             SessionManager.startHeartbeat(engine, examTimer);
@@ -92,6 +101,7 @@ async function startApp() {
 
     } catch (error) {
         appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
+        console.error(error);
     }
 }
 

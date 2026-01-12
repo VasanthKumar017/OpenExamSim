@@ -1,32 +1,81 @@
-.timer {
-  font-family: 'Monaco', 'Consolas', monospace;
-  font-weight: 600;
-  background: #f1f5f9;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  min-width: 200px;
-  text-align: center;
+.exam-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 2rem;
+    
+    // Group the label and the timer together
+    .timer-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-  &.timer-normal {
-    color: #059669;      // Professional Green
-    background: #ecfdf5; // Very light green bg
-    border-color: #a7f3d0;
-  }
-
-  // Blinking red effect for low time
-  &.timer-low {
-    color: #dc2626;      // Professional Red
-    background: #fef2f2; // Very light red bg
-    border-color: #fecaca;
-    animation: blink 1s infinite;
-  }
+    .timer-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ff0000;
+        text-transform: uppercase;
+    }
 }
 
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.8; }
-  100% { opacity: 1; }
-}
+    .timer {
+      /* Layout & Sizing */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 100px;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      
+      /* Typography */
+      font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      
+      /* Transitions */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+    
+      /* Default / Normal State (Green) */
+      &.timer-normal {
+        background-color: #f0fdf4; // Very light green
+        color: #16a34a;            // Strong green text
+        border-color: #bbf7d0;     // Soft green border
+      }
+    
+      /* Warning State (Red + Animation) */
+      &.timer-low {
+        background-color: #fef2f2; // Very light red
+        color: #dc2626;            // Strong red text
+        border-color: #fecaca;     // Soft red border
+        animation: pulse-border 1.5s infinite;
+      }
+    }
+    
+    /* Label styling to sit next to it */
+    .timer-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      margin-right: 8px;
+    }
+    
+    /* Subtle attention-grabbing animation for the final minutes */
+    @keyframes pulse-border {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.2);
+      }
+      50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+      }
+    }

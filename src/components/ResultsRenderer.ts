@@ -1,18 +1,13 @@
-import { ExamEngine } from '../core/engine'; // We need the engine type now
+import { ExamEngine } from '../core/engine';
 
 export class ResultsRenderer {
     private container: HTMLElement;
 
-    constructor() {
-        this.container = document.getElementById('app')!;
+    constructor(container: HTMLElement) {
+        this.container = container;
     }
 
-    /**
-     * Renders the final performance report.
-     * Logic is now outsourced to the engine for consistency.
-     */
     public render(engine: ExamEngine) {
-        // 1. Get the centralized math from the engine
         const { score, total, percentage } = engine.calculateScore();
         const questions = engine.getQuestions();
         const userAnswers = engine.getState().answers;
@@ -23,9 +18,9 @@ export class ResultsRenderer {
                     <h1>Performance Report</h1>
                     <div class="score-badge">${score} / ${total}</div>
                     <p class="percentage">${percentage}%</p>
-                    <button onclick="window.location.reload()" class="restart-btn">Try Again</button>
+                    <button id="restart-exam-btn" class="restart-btn">Try Again</button>
                 </div>
-
+                
                 <div class="review-list">
                     ${questions.map((q, index) => {
                         const userAnsIndex = userAnswers[index];
@@ -37,21 +32,14 @@ export class ResultsRenderer {
                                     <strong>Question ${index + 1}</strong>
                                     <span class="status-icon">${isCorrect ? '✔' : '✘'}</span>
                                 </div>
-                                
                                 <p class="q-text">${q.text}</p>
-                                
                                 <div class="ans-comparison">
-                                    <div class="ans-box your-ans-box ${!isCorrect ? 'wrong' : ''}">
+                                    <div class="ans-box">
                                         <label>Your Choice</label>
-                                        <p>
-                                            ${userAnsIndex !== undefined 
-                                                ? q.options[userAnsIndex as number] 
-                                                : '<span class="skipped">Skipped</span>'}
-                                        </p>
+                                        <p>${userAnsIndex !== undefined ? q.options[userAnsIndex as number] : '<em>Skipped</em>'}</p>
                                     </div>
-                                    
                                     ${!isCorrect ? `
-                                        <div class="ans-box correct-ans-box">
+                                        <div class="ans-box correct">
                                             <label>Correct Answer</label>
                                             <p>${q.options[q.correctAnswer]}</p>
                                         </div>
@@ -63,5 +51,9 @@ export class ResultsRenderer {
                 </div>
             </div>
         `;
+
+        this.container.querySelector('#restart-exam-btn')?.addEventListener('click', () => {
+            window.location.reload();
+        });
     }
 }

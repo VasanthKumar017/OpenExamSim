@@ -1,64 +1,53 @@
 export class Timer {
     private timeLeft: number;
-    private totalTime: number;
-    private intervalId: number | null = null;
-    private element: HTMLElement | null = null;
+    private timerId: number | null = null;
+    private displayElement: HTMLElement | null | undefined; 
     private onTimeUp: () => void;
 
-    // Corrected: Only ONE constructor implementation
-    constructor(durationSeconds: number, onTimeUp: () => void, startTime?: number) {
-        this.totalTime = durationSeconds;
-        // Uses startTime from localStorage if it exists, otherwise starts from the beginning
-        this.timeLeft = startTime !== undefined ? startTime : durationSeconds;
+    constructor(
+        duration: number, 
+        onTimeUp: () => void, 
+        initialSeconds?: number, 
+        displayElement?: HTMLElement | null 
+    ) {
+        this.timeLeft = initialSeconds !== undefined ? initialSeconds : duration;
         this.onTimeUp = onTimeUp;
-        this.element = document.getElementById('timer');
-        
-        // Update display immediately so the user doesn't see "00:00" while waiting
+        this.displayElement = displayElement;
         this.updateDisplay();
     }
 
     public start() {
-        if (!this.element) return;
-        if (this.intervalId) return; // Prevent multiple timers from running at once
-        
-        this.element.classList.add('timer-normal');
-        this.updateDisplay();
-
-        this.intervalId = window.setInterval(() => {
+        if (this.timerId) return;
+        this.timerId = window.setInterval(() => {
             this.timeLeft--;
             this.updateDisplay();
-
-            if (this.timeLeft <= 0) {
-                this.stop();
-                this.onTimeUp();
-            }
+            if (this.timeLeft <= 0) this.stop();
         }, 1000);
     }
 
     public stop() {
-        if (this.intervalId) {
-            clearInterval(this.intervalId);
-            this.intervalId = null;
-        }
+        if (this.timerId) clearInterval(this.timerId);
+        if (this.timeLeft <= 0) this.onTimeUp();
     }
 
-    public getTimeLeft(): number {
-        return this.timeLeft;
-    }
+    public getTimeLeft() { return this.timeLeft; }
 
     private updateDisplay() {
-        if (!this.element) return;
-
-        const mins = Math.floor(this.timeLeft / 60);
-        const secs = this.timeLeft % 60;
-        const timeString = `${mins}:${secs.toString().padStart(2, '0')}`;
-        this.element.innerText = `Time Remaining: ${timeString}`;
-
-        const threshold = this.totalTime * 0.1;
-
-        if (this.timeLeft <= threshold) {
-            this.element.classList.remove('timer-normal');
-            this.element.classList.add('timer-low');
+        if (this.displayElement) {
+            const minutes = Math.floor(this.timeLeft / 60);
+            const seconds = this.timeLeft % 60;
+            
+            // Only update the numbers
+            this.displayElement.innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Handle warning states based on your professional SCSS classes
+            if (this.timeLeft < 300) { // Less than 5 minutes
+                this.displayElement.classList.add('timer-low');
+                this.displayElement.classList.remove('timer-normal');
+            } else {
+                this.displayElement.classList.add('timer-normal');
+                this.displayElement.classList.remove('timer-low');
+            }
         }
     }
 }
