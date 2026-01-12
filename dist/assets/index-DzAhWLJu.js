@@ -1,5 +1,5 @@
 /* empty css                                    */
-import { ExamEngine } from './__federation_expose_Engine-BTkBYK_r.js';
+import { ExamEngine } from './__federation_expose_Engine-B2XCRQm9.js';
 import { QuestionRenderer } from './__federation_expose_Renderer-Dqk9uT_7.js';
 
 true&&(function polyfill() {
@@ -141,14 +141,17 @@ class Timer {
   intervalId = null;
   element = null;
   onTimeUp;
-  constructor(durationSeconds, onTimeUp) {
+  // Corrected: Only ONE constructor implementation
+  constructor(durationSeconds, onTimeUp, startTime) {
     this.totalTime = durationSeconds;
-    this.timeLeft = durationSeconds;
+    this.timeLeft = startTime !== void 0 ? startTime : durationSeconds;
     this.onTimeUp = onTimeUp;
     this.element = document.getElementById("timer");
+    this.updateDisplay();
   }
   start() {
     if (!this.element) return;
+    if (this.intervalId) return;
     this.element.classList.add("timer-normal");
     this.updateDisplay();
     this.intervalId = window.setInterval(() => {
@@ -161,7 +164,13 @@ class Timer {
     }, 1e3);
   }
   stop() {
-    if (this.intervalId) clearInterval(this.intervalId);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+  getTimeLeft() {
+    return this.timeLeft;
   }
   updateDisplay() {
     if (!this.element) return;
@@ -183,6 +192,7 @@ class SubmissionController {
   constructor(engine) {
     this.engine = engine;
     this.container = document.getElementById("submission-slot");
+    this.container.classList.add("submission-bar");
   }
   // This is the method the error is complaining about
   renderLockBtn(selectedIndex, onConfirm) {
@@ -207,15 +217,51 @@ class SubmissionController {
 
 async function startApp() {
   const appContainer = document.querySelector("#app");
+  const startScreen = document.getElementById("start-screen");
+  const startBtn = document.getElementById("start-btn");
   const useTimer = true;
   const exTime = 60 * 60;
+  const saveProgress = (engine, timer) => {
+    const state = engine.getState();
+    const dataToSave = {
+      engineState: state,
+      timeLeft: timer ? timer.getTimeLeft() : null
+      // Save the current seconds left
+    };
+    localStorage.setItem("exam_progress", JSON.stringify(dataToSave));
+  };
   try {
     const questions = await fetchExamData();
     const engine = new ExamEngine(questions);
     const renderer = new QuestionRenderer();
     const resultsView = new ResultsRenderer();
     const submission = new SubmissionController(engine);
+    const endTestBtn = document.getElementById("end-test-btn");
+    const finishExam = () => {
+      if (examTimer) examTimer.stop();
+      localStorage.removeItem("exam_progress");
+      resultsView.render(engine.getQuestions(), engine.getState().answers);
+      if (endTestBtn) endTestBtn.style.display = "none";
+    };
+    if (endTestBtn) {
+      endTestBtn.addEventListener("click", () => {
+        const confirmed = confirm("Are you sure you want to end the test? This will submit all current answers.");
+        if (confirmed) {
+          finishExam();
+        }
+      });
+    }
     let examTimer = null;
+    let initialSeconds;
+    const saved = localStorage.getItem("exam_progress");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.engineState && typeof engine.loadState === "function") {
+        engine.loadState(parsed.engineState);
+      }
+      initialSeconds = parsed.timeLeft;
+      startScreen.classList.add("hidden");
+    }
     const updateNavigationUI = () => {
       window.dispatchEvent(new Event("refresh-nav"));
     };
@@ -223,6 +269,10 @@ async function startApp() {
       const state = engine.getState();
       const currentQ = engine.getCurrentQuestion();
       const currentAns = state.answers[state.currentIdx];
+      const counterElement = document.getElementById("q-counter");
+      if (counterElement) {
+        counterElement.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
+      }
       renderer.render(currentQ, currentAns);
       submission.clear();
       const nextBtn = document.getElementById("next-btn");
@@ -235,13 +285,27 @@ async function startApp() {
     if (useTimer) {
       examTimer = new Timer(exTime, () => {
         alert("Time is up!");
+        localStorage.removeItem("exam_progress");
         resultsView.render(engine.getQuestions(), engine.getState().answers);
-      });
-      examTimer.start();
+      }, initialSeconds);
     }
-    setupNavigation(engine, updateUI, () => {
+    setupNavigation(engine, () => {
+      updateUI();
+      saveProgress(engine, examTimer);
+    }, () => {
       if (examTimer) examTimer.stop();
+      localStorage.removeItem("exam_progress");
       resultsView.render(engine.getQuestions(), engine.getState().answers);
+    });
+    setInterval(() => {
+      if (examTimer && !startScreen.classList.contains("hidden")) {
+        saveProgress(engine, examTimer);
+      }
+    }, 5e3);
+    startBtn.addEventListener("click", () => {
+      startScreen.classList.add("hidden");
+      if (useTimer && examTimer) examTimer.start();
+      updateUI();
     });
     window.addEventListener("answer-selected", (e) => {
       const { index } = e.detail;
@@ -255,9 +319,13 @@ async function startApp() {
       }
       submission.renderLockBtn(index, () => {
         updateNavigationUI();
+        saveProgress(engine, examTimer);
       });
     });
-    updateUI();
+    if (saved) {
+      if (useTimer && examTimer) examTimer.start();
+      updateUI();
+    }
   } catch (error) {
     appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
     console.error(error);

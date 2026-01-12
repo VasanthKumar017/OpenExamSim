@@ -4,33 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OpenExamSim</title>
-    <script type="module" crossorigin src="/assets/index-BDWASmbZ.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/__federation_expose_Engine-BTkBYK_r.js">
+    <script type="module" crossorigin src="/assets/index-DzAhWLJu.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/__federation_expose_Engine-B2XCRQm9.js">
     <link rel="modulepreload" crossorigin href="/assets/__federation_expose_Renderer-Dqk9uT_7.js">
-    <link rel="stylesheet" crossorigin href="/assets/style-C9P-KON1.css">
+    <link rel="stylesheet" crossorigin href="/assets/style-D867mRzU.css">
   </head>
   <body>
+    
     <div id="app">
+
+        <div id="start-screen" class="start-overlay">
+          <div class="start-card">
+            <h1>Ready to begin?</h1>
+            <p>This exam consists of multiple questions. Once you click start, the timer will begin.</p>
+            <button id="start-btn" class="start-btn">Start Exam</button>
+        </div>
+       </div>
+
       <header class="exam-header">
-        <div class="logo">OpenExamSim</div>
+        <!-- <div class="logo">OpenExamSim</div> -->
         <div id="timer" class="timer">Time Remaining: --:--</div>
+        <button id="end-test-btn" class="end-test-btn">End Test</button>
       </header>
 
       <main class="exam-layout">
-        <aside class="question-nav">
+        <!-- <aside class="question-nav">
           <h3>Questions</h3>
           <div id="nav-grid" class="nav-grid"></div>
-        </aside>
+        </aside> -->
 
         <section class="question-area">
           <div id="question-container">
+            <div id="q-counter" class="q-counter">Question -- of --</div>
             <h2 id="q-text">Loading question...</h2>
             <div id="options-container"></div>
-            <div id="submission-slot"></div>
           </div>
           
           <footer class="controls">
             <button id="prev-btn" class="secondary-btn">Previous</button>
+            <div id="submission-slot"></div>
             <button id="next-btn" class="primary-btn">Next</button>
           </footer>
         </section>

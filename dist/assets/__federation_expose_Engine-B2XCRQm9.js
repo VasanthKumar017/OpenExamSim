@@ -60,6 +60,10 @@ class ExamEngine {
   submit() {
     this.state.isSubmitted = true;
   }
+  // Add this method to allow the engine to resume from a saved state
+  loadState(savedState) {
+    this.state = savedState;
+  }
 }
 
 export { ExamEngine };
