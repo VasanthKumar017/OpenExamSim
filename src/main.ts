@@ -7,6 +7,7 @@ import { setupNavigation } from './components/Navigation';
 import { ResultsRenderer } from './components/ResultsRenderer';
 import { Timer } from './components/Timer';
 import { eventBus } from './utils/EventBus';
+import { QuestionNavigation } from './components/QuestionNavigation';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
@@ -17,12 +18,16 @@ async function startApp() {
     const qCounter = document.getElementById('q-counter');
     const optionsContainer = document.getElementById('options-container')!;
     const qTextElement = document.getElementById('q-text')!;
+    const navContainer = document.getElementById('nav-container')!; 
+    
 
     try {
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
         const renderer = new QuestionRenderer(optionsContainer, qTextElement);
         const resultsView = new ResultsRenderer(appContainer);
+        const navTracker = new QuestionNavigation(navContainer, engine);
+        navTracker.render();
         
         const saved = SessionManager.load();
         if (saved && saved.engineState) {
@@ -46,6 +51,10 @@ async function startApp() {
             
             eventBus.emit('refresh-nav');
         };
+
+        eventBus.on('nav-jump', () => {
+            updateUI();
+        });
 
         const finishExam = () => {
             examTimer.stop();

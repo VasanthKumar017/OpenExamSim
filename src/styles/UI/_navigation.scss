@@ -33,3 +33,48 @@
     }
   }
 }
+
+.nav-sidebar {
+    background: #e0e0ff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 280px;
+
+    h3 {
+        margin-top: 0;
+        font-size: 0.9rem;
+        color: #444;
+        letter-spacing: 1px;
+    }
+
+    .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+    }
+
+    .nav-item {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px 5px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+
+        &.current {
+            background: #ff6b35; // The orange color from your image
+            color: white;
+            border-color: #ff6b35;
+        }
+
+        &.answered {
+            background: #d1d1f0;
+            border-color: #b0b0d0;
+        }
+
+        &:hover:not(.current) {
+            background: #f0f0f0;
+        }
+    }
+}

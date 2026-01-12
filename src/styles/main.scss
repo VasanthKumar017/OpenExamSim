@@ -1,6 +1,7 @@
+/* src/styles/main.scss */
 @use 'sass:color';
-@use 'variables' as *;
-@use 'UI'; // Forwards all UI component styles
+@use 'variables' as *; // Ensure this file actually contains $border-radius
+@use 'UI'; 
 
 body {
   background-color: $background-gray;
@@ -14,11 +15,11 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
-  max-width: 1200px;
+  max-width: 1400px; 
   margin: 0 auto;
 
   @media (min-width: 768px) {
-    flex-direction: row;
+    flex-direction: row; // Sidebar to the right
     padding: 2rem;
     gap: 2rem;
   }
@@ -27,27 +28,49 @@ body {
     flex: 1;
     background: white;
     padding: 1.5rem;
-    border-radius: $border-radius;
+    /* Use a fallback if the variable fails again */
+    border-radius: #{$border-radius}; 
     box-shadow: $shadow-sm;
-    display: flex;
-    flex-direction: column;
-    min-height: 500px; 
+    min-height: 600px;
 
     @media (min-width: 768px) {
       padding: 2.5rem;
-    }
-
-    h2 {
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-      color: $text-dark;
     }
   }
 
   .sidebar {
     width: 100%;
+    
     @media (min-width: 768px) {
-      width: 300px;
+      width: 320px;
+      position: sticky; 
+      top: 2rem;
+      height: fit-content; 
+    }
+
+    .nav-sidebar {
+      background: #e0e0ff;
+      padding: 1.2rem;
+      border-radius: 8px; // Hardcoded simple fix if variable is brittle
+      display: flex;
+      flex-direction: column;
+      max-height: 80vh; 
+
+      .question-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        overflow-y: auto; // Scrollbar fix
+        padding-right: 8px; 
+        
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #c0c0e0;
+          border-radius: 10px;
+        }
+      }
     }
   }
 }
