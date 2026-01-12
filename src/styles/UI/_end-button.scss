@@ -1,10 +1,7 @@
-/* src/styles/UI/_end-button.scss */
 @use '../variables' as *;
 
 .end-test-btn {
-  /* REMOVED: position: absolute, right, transform */
-  
-  background-color: $danger; // Using variable from your file
+  background-color: $danger;
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
@@ -14,8 +11,9 @@
   transition: all $transition-speed;
   font-size: 0.85rem;
   text-transform: uppercase;
-  white-space: nowrap; // Prevents the button text from wrapping/clipping
-  margin-left: 20px;   // Extra safety margin
+  
+  position: relative;
+  z-index: 5;
 
   &:hover {
     background-color: #dc2626;

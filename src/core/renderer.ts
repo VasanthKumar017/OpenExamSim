@@ -1,4 +1,5 @@
 import { Question } from '../types';
+import { eventBus } from '../utils/EventBus';
 
 export class QuestionRenderer {
     private container: HTMLElement;
@@ -40,8 +41,6 @@ export class QuestionRenderer {
     }
 
     private handleSelection(index: number, type: 'multiple-choice' | 'checkbox') {
-        window.dispatchEvent(new CustomEvent('answer-selected', { 
-            detail: { index, type } 
-        }));
+        eventBus.emit('answer-selected', { index, type });
     }
 }

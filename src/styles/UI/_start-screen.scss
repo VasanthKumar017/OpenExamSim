@@ -16,12 +16,9 @@
 
   &.hidden {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
   }
-
-  #end-test-btn {
-  display: none; /* Hidden until the exam starts */
-}
 }
 
 .start-card {
