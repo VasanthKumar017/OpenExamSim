@@ -1,5 +1,5 @@
 /* empty css                                    */
-import { ExamEngine } from './__federation_expose_Engine-B2XCRQm9.js';
+import { ExamEngine } from './__federation_expose_Engine-CiJvGudl.js';
 import { QuestionRenderer } from './__federation_expose_Renderer-Dqk9uT_7.js';
 
 true&&(function polyfill() {
@@ -186,47 +186,18 @@ class Timer {
   }
 }
 
-class SubmissionController {
-  container;
-  engine;
-  constructor(engine) {
-    this.engine = engine;
-    this.container = document.getElementById("submission-slot");
-    this.container.classList.add("submission-bar");
-  }
-  // This is the method the error is complaining about
-  renderLockBtn(selectedIndex, onConfirm) {
-    this.container.innerHTML = `
-            <button id="lock-btn" class="lock-btn">Confirm Answer</button>
-        `;
-    const btn = document.getElementById("lock-btn");
-    btn.onclick = () => {
-      this.engine.handleAnswer(selectedIndex);
-      btn.innerText = "Locked ✓";
-      btn.classList.add("locked");
-      btn.disabled = true;
-      onConfirm();
-    };
-  }
-  clear() {
-    if (this.container) {
-      this.container.innerHTML = "";
-    }
-  }
-}
-
 async function startApp() {
   const appContainer = document.querySelector("#app");
   const startScreen = document.getElementById("start-screen");
   const startBtn = document.getElementById("start-btn");
+  const endTestBtn = document.getElementById("end-test-btn");
+  const EXAM_DURATION = 60 * 60;
   const useTimer = true;
-  const exTime = 60 * 60;
   const saveProgress = (engine, timer) => {
     const state = engine.getState();
     const dataToSave = {
       engineState: state,
       timeLeft: timer ? timer.getTimeLeft() : null
-      // Save the current seconds left
     };
     localStorage.setItem("exam_progress", JSON.stringify(dataToSave));
   };
@@ -235,46 +206,15 @@ async function startApp() {
     const engine = new ExamEngine(questions);
     const renderer = new QuestionRenderer();
     const resultsView = new ResultsRenderer();
-    const submission = new SubmissionController(engine);
-    const endTestBtn = document.getElementById("end-test-btn");
-    const finishExam = () => {
-      if (examTimer) examTimer.stop();
-      localStorage.removeItem("exam_progress");
-      resultsView.render(engine.getQuestions(), engine.getState().answers);
-      if (endTestBtn) endTestBtn.style.display = "none";
-    };
-    if (endTestBtn) {
-      endTestBtn.addEventListener("click", () => {
-        const confirmed = confirm("Are you sure you want to end the test? This will submit all current answers.");
-        if (confirmed) {
-          finishExam();
-        }
-      });
-    }
     let examTimer = null;
-    let initialSeconds;
-    const saved = localStorage.getItem("exam_progress");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.engineState && typeof engine.loadState === "function") {
-        engine.loadState(parsed.engineState);
-      }
-      initialSeconds = parsed.timeLeft;
-      startScreen.classList.add("hidden");
-    }
-    const updateNavigationUI = () => {
-      window.dispatchEvent(new Event("refresh-nav"));
-    };
+    let savedTime;
     const updateUI = () => {
       const state = engine.getState();
       const currentQ = engine.getCurrentQuestion();
       const currentAns = state.answers[state.currentIdx];
-      const counterElement = document.getElementById("q-counter");
-      if (counterElement) {
-        counterElement.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
-      }
+      const counter = document.getElementById("q-counter");
+      if (counter) counter.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
       renderer.render(currentQ, currentAns);
-      submission.clear();
       const nextBtn = document.getElementById("next-btn");
       const prevBtn = document.getElementById("prev-btn");
       if (prevBtn && nextBtn) {
@@ -282,53 +222,65 @@ async function startApp() {
         nextBtn.innerText = state.currentIdx === state.total - 1 ? "Finish Exam" : "Next";
       }
     };
-    if (useTimer) {
-      examTimer = new Timer(exTime, () => {
-        alert("Time is up!");
-        localStorage.removeItem("exam_progress");
-        resultsView.render(engine.getQuestions(), engine.getState().answers);
-      }, initialSeconds);
+    const updateNavigationUI = () => {
+      window.dispatchEvent(new Event("refresh-nav"));
+    };
+    const finishExam = () => {
+      if (examTimer) examTimer.stop();
+      localStorage.removeItem("exam_progress");
+      resultsView.render(engine.getQuestions(), engine.getState().answers);
+      if (endTestBtn) endTestBtn.style.display = "none";
+    };
+    const savedData = localStorage.getItem("exam_progress");
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      if (parsed.engineState && typeof engine.loadState === "function") {
+        engine.loadState(parsed.engineState);
+      }
+      savedTime = parsed.timeLeft;
+      startScreen.classList.add("hidden");
     }
+    if (useTimer) {
+      examTimer = new Timer(EXAM_DURATION, () => {
+        alert("Time is up!");
+        finishExam();
+      }, savedTime);
+    }
+    window.addEventListener("answer-selected", (e) => {
+      const { index } = e.detail;
+      engine.handleAnswer(index);
+      updateUI();
+      saveProgress(engine, examTimer);
+      updateNavigationUI();
+    });
     setupNavigation(engine, () => {
       updateUI();
       saveProgress(engine, examTimer);
     }, () => {
-      if (examTimer) examTimer.stop();
-      localStorage.removeItem("exam_progress");
-      resultsView.render(engine.getQuestions(), engine.getState().answers);
+      finishExam();
+    });
+    if (endTestBtn) {
+      endTestBtn.addEventListener("click", () => {
+        if (confirm("End the test and submit all answers?")) finishExam();
+      });
+    }
+    startBtn.addEventListener("click", () => {
+      startScreen.classList.add("hidden");
+      if (examTimer) examTimer.start();
+      updateUI();
     });
     setInterval(() => {
-      if (examTimer && !startScreen.classList.contains("hidden")) {
+      if (examTimer && startScreen.classList.contains("hidden")) {
         saveProgress(engine, examTimer);
       }
     }, 5e3);
-    startBtn.addEventListener("click", () => {
-      startScreen.classList.add("hidden");
-      if (useTimer && examTimer) examTimer.start();
-      updateUI();
-    });
-    window.addEventListener("answer-selected", (e) => {
-      const { index } = e.detail;
-      const allOptions = document.querySelectorAll(".option-card");
-      allOptions.forEach((card) => card.classList.remove("selected"));
-      const selectedCard = allOptions[index];
-      if (selectedCard) {
-        selectedCard.classList.add("selected");
-        const radio = selectedCard.querySelector("input");
-        if (radio) radio.checked = true;
-      }
-      submission.renderLockBtn(index, () => {
-        updateNavigationUI();
-        saveProgress(engine, examTimer);
-      });
-    });
-    if (saved) {
-      if (useTimer && examTimer) examTimer.start();
+    if (savedData) {
+      if (examTimer) examTimer.start();
       updateUI();
     }
   } catch (error) {
-    appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
-    console.error(error);
+    appContainer.innerHTML = `<div class="error"><h1>Error Loading Exam</h1></div>`;
+    console.error("Critical MFE Error:", error);
   }
 }
 startApp();
