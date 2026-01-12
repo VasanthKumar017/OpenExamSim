@@ -63,13 +63,8 @@ const setupNavigation = (engine, onUpdate, onFinish) => {
   });
   nextBtn?.addEventListener("click", () => {
     const state = engine.getState();
-    const questions = engine.getQuestions();
-    if (state.currentIdx === questions.length - 1) {
-      let score = 0;
-      questions.forEach((q, idx) => {
-        if (state.answers[idx] === q.correctAnswer) score++;
-      });
-      onFinish(score);
+    if (state.currentIdx === state.total - 1) {
+      onFinish();
     } else {
       engine.next();
       onUpdate();
@@ -82,19 +77,20 @@ class ResultsRenderer {
   constructor() {
     this.container = document.getElementById("app");
   }
-  render(questions, userAnswers) {
-    let score = 0;
-    questions.forEach((q, index) => {
-      if (userAnswers[index] === q.correctAnswer) {
-        score++;
-      }
-    });
+  /**
+   * Renders the final performance report.
+   * Logic is now outsourced to the engine for consistency.
+   */
+  render(engine) {
+    const { score, total, percentage } = engine.calculateScore();
+    const questions = engine.getQuestions();
+    const userAnswers = engine.getState().answers;
     this.container.innerHTML = `
             <div class="results-container">
                 <div class="results-summary">
                     <h1>Performance Report</h1>
-                    <div class="score-badge">${score} / ${questions.length}</div>
-                    <p class="percentage">${(score / questions.length * 100).toFixed(1)}%</p>
+                    <div class="score-badge">${score} / ${total}</div>
+                    <p class="percentage">${percentage}%</p>
                     <button onclick="window.location.reload()" class="restart-btn">Try Again</button>
                 </div>
 
@@ -115,7 +111,7 @@ class ResultsRenderer {
                                     <div class="ans-box your-ans-box ${!isCorrect ? "wrong" : ""}">
                                         <label>Your Choice</label>
                                         <p>
-                                            ${userAnsIndex !== void 0 ? q.options[userAnsIndex] : "Skipped"}
+                                            ${userAnsIndex !== void 0 ? q.options[userAnsIndex] : '<span class="skipped">Skipped</span>'}
                                         </p>
                                     </div>
                                     
@@ -228,7 +224,7 @@ async function startApp() {
     const finishExam = () => {
       if (examTimer) examTimer.stop();
       localStorage.removeItem("exam_progress");
-      resultsView.render(engine.getQuestions(), engine.getState().answers);
+      resultsView.render(engine);
       if (endTestBtn) endTestBtn.style.display = "none";
     };
     const savedData = localStorage.getItem("exam_progress");

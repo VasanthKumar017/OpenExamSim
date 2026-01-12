@@ -2,6 +2,7 @@ import './styles/main.scss';
 import { ExamEngine } from './core/engine';
 import { QuestionRenderer } from './core/renderer';
 import { fetchExamData } from './core/data-loader';
+import { SessionManager } from './core/session-manager';
 import { setupNavigation } from './components/Navigation';
 import { ResultsRenderer } from './components/ResultsRenderer';
 import { Timer } from './components/Timer';
@@ -11,144 +12,86 @@ async function startApp() {
     const startScreen = document.getElementById('start-screen')!;
     const startBtn = document.getElementById('start-btn')!;
     const endTestBtn = document.getElementById('end-test-btn') as HTMLButtonElement;
-    
-    const EXAM_DURATION = 60 * 60; // 60 minutes
-    const useTimer = true;
-
-    // --- HELPER: PERSISTENCE ---
-    // Saves current state and timer to localStorage to prevent data loss on refresh
-    const saveProgress = (engine: ExamEngine, timer?: Timer | null) => {
-        const state = engine.getState();
-        const dataToSave = {
-            engineState: state,
-            timeLeft: timer ? timer.getTimeLeft() : null
-        };
-        localStorage.setItem('exam_progress', JSON.stringify(dataToSave));
-    };
 
     try {
-        // --- INITIALIZATION ---
+        // 1. Setup Core
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
         const renderer = new QuestionRenderer();
         const resultsView = new ResultsRenderer();
+        
+        // 2. Load Session
+        const saved = SessionManager.load();
+        if (saved) {
+            if (saved.engineState) engine.loadState(saved.engineState);
+            startScreen.classList.add('hidden');
+        }
 
-        let examTimer: Timer | null = null;
-        let savedTime: number | undefined;
+        // 3. Setup Timer
+        const examTimer = new Timer(3600, () => finishExam(), saved?.timeLeft);
 
-        // --- UI ORCHESTRATORS ---
-        // Updates the main question area and the radio button states
+        // 4. Centralized UI Updater
         const updateUI = () => {
             const state = engine.getState();
-            const currentQ = engine.getCurrentQuestion();
-            const currentAns = state.answers[state.currentIdx];
+            renderer.render(engine.getCurrentQuestion(), state.answers[state.currentIdx]);
             
-            // Update Question Counter
             const counter = document.getElementById('q-counter');
             if (counter) counter.innerText = `Question ${state.currentIdx + 1} of ${state.total}`;
-
-            // Render current question and options
-            renderer.render(currentQ, currentAns);
-
-            // Update Next/Prev button labels
-            const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
-            const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
-            if (prevBtn && nextBtn) {
-                prevBtn.disabled = state.currentIdx === 0;
-                nextBtn.innerText = state.currentIdx === state.total - 1 ? "Finish Exam" : "Next";
-            }
-        };
-
-        const updateNavigationUI = () => {
+            
             window.dispatchEvent(new Event('refresh-nav'));
         };
 
+        // 5. Define Finish Logic
         const finishExam = () => {
-            if (examTimer) examTimer.stop();
-            localStorage.removeItem('exam_progress');
+            examTimer.stop();
+            SessionManager.clear();
             resultsView.render(engine);
+            
+            // UI Clean up
             if (endTestBtn) endTestBtn.style.display = 'none';
+            const controls = document.querySelector('.controls') as HTMLElement;
+            if (controls) controls.style.display = 'none';
         };
 
-        // --- SESSION RECOVERY ---
-        // Check if user has an existing session in localStorage
-        const savedData = localStorage.getItem('exam_progress');
-        if (savedData) {
-            const parsed = JSON.parse(savedData);
-            
-            // Fix: Engine needs to be updated with saved answers/index
-            // (Ensure you add public loadState(state) { this.state = state } to engine.ts)
-            if (parsed.engineState && typeof (engine as any).loadState === 'function') {
-                (engine as any).loadState(parsed.engineState);
-            }
-            
-            savedTime = parsed.timeLeft;
-            startScreen.classList.add('hidden');
-        }
-
-        // --- TIMER SETUP ---
-        if (useTimer) {
-            examTimer = new Timer(EXAM_DURATION, () => {
-                alert("Time is up!");
-                finishExam();
-            }, savedTime);
-        }
-
-        // --- INTERACTION LISTENERS ---
-        
-        // Handle direct selection (Auto-save mode)
-        window.addEventListener('answer-selected', (e: Event) => {
-            const { index } = (e as CustomEvent).detail;
-            
-            // Save to Engine immediately (Radio button logic)
-            engine.handleAnswer(index); 
-            
-            // Update Visuals and Persistence
-            updateUI(); 
-            saveProgress(engine, examTimer); 
-            updateNavigationUI(); 
-        });
-
-        // Navigation (Prev/Next/Finish)
-        setupNavigation(engine, () => {
-            updateUI();
-            saveProgress(engine, examTimer); 
-        }, () => {
-            finishExam();
-        });
-
-        // Manual End Test Button
+        // --- THE MISSING FIX: Attach the event listener ---
         if (endTestBtn) {
             endTestBtn.addEventListener('click', () => {
-                if (confirm("End the test and submit all answers?")) finishExam();
+                if (confirm("Are you sure you want to end the test and see your results?")) {
+                    finishExam();
+                }
             });
         }
 
-        // Start Screen Logic
+        // 6. Connect Events
         startBtn.addEventListener('click', () => {
             startScreen.classList.add('hidden');
-            if (examTimer) examTimer.start();
+            if (endTestBtn) endTestBtn.style.display = 'block'; // Show button on start
+            examTimer.start();
             updateUI();
+            SessionManager.startHeartbeat(engine, examTimer);
         });
 
-        // --- BACKGROUND SYNC ---
-        // Heartbeat: save timer every 5 seconds in case of crash
-        setInterval(() => {
-            if (examTimer && startScreen.classList.contains('hidden')) {
-                saveProgress(engine, examTimer);
-            }
-        }, 5000);
-
-        // --- FINAL BOOTSTRAP ---
-        // If we recovered a session, start the app immediately
-        if (savedData) {
-            if (examTimer) examTimer.start();
+        window.addEventListener('answer-selected', (e: Event) => {
+            engine.handleAnswer((e as CustomEvent).detail.index);
             updateUI();
+            SessionManager.save(engine, examTimer);
+        });
+
+        setupNavigation(engine, () => {
+            updateUI();
+            SessionManager.save(engine, examTimer);
+        }, finishExam);
+
+        // Bootstrap if resuming
+        if (saved) {
+            if (endTestBtn) endTestBtn.style.display = 'block'; // Show button on resume
+            examTimer.start();
+            updateUI();
+            SessionManager.startHeartbeat(engine, examTimer);
         }
 
     } catch (error) {
-        appContainer.innerHTML = `<div class="error"><h1>Error Loading Exam</h1></div>`;
-        console.error("Critical MFE Error:", error);
+        appContainer.innerHTML = `<div class="error"><h1>Error loading exam</h1></div>`;
     }
 }
 
