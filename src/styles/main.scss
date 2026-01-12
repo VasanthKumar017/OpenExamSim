@@ -1,11 +1,12 @@
 @use 'sass:color';
-@use 'UI';
 @use 'variables' as *;
+@use 'UI'; // Forwards all UI component styles
 
 body {
   background-color: $background-gray;
   color: $text-dark;
-  font-family: 'Inter', sans-serif;
+  font-family: $font-main;
+  margin: 0;
 }
 
 .exam-layout {
@@ -13,9 +14,11 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 
   @media (min-width: 768px) {
-    flex-direction: row; // Return to side-by-side layout for tablets/desktops
+    flex-direction: row;
     padding: 2rem;
     gap: 2rem;
   }
@@ -26,6 +29,9 @@ body {
     padding: 1.5rem;
     border-radius: $border-radius;
     box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px; 
 
     @media (min-width: 768px) {
       padding: 2.5rem;
@@ -34,25 +40,14 @@ body {
     h2 {
       margin-bottom: 1.5rem;
       font-size: 1.5rem;
+      color: $text-dark;
     }
   }
 
-  .nav-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
-    margin-top: 1rem;
-
-    .nav-item {
-      padding: 0.5rem;
-      text-align: center;
-      border: 1px solid #cbd5e0;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-
-      &.current { background: $primary-blue; color: white; }
-      &.answered { background: #c6f6d5; border-color: #48bb78; }
+  .sidebar {
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 300px;
     }
   }
 }

@@ -1,0 +1,56 @@
+@use 'sass:color';
+@use '../variables' as *;
+
+.controls {
+  margin-top: auto; // Pushes controls to the bottom of the question-area card
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  #submission-slot {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    min-width: 120px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all $transition-speed;
+    border: 1px solid transparent;
+
+    &:disabled {
+      background-color: #f1f5f9;
+      color: #94a3b8;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+    }
+  }
+
+  .primary-btn {
+    background-color: $primary-blue;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: color.adjust($primary-blue, $lightness: -10%);
+    }
+  }
+
+  .secondary-btn {
+    background-color: white;
+    color: $text-dark;
+    border-color: #cbd5e0;
+
+    &:hover:not(:disabled) {
+      background-color: #f8fafc;
+    }
+  }
+}

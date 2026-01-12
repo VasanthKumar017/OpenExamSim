@@ -4,12 +4,13 @@
 .option-card {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1.25rem;
   margin-bottom: 1rem;
   border: 2px solid #e2e8f0;
   border-radius: $border-radius;
-  transition: all 0.2s ease;
+  transition: all $transition-speed;
   cursor: pointer;
+  background: white;
 
   &:hover {
     border-color: $primary-blue;
@@ -17,53 +18,41 @@
   }
 
   &.selected {
-    background-color: color.adjust($primary-blue, $lightness: 45%);
+    background-color: rgba($primary-blue, 0.05);
     border-color: $primary-blue;
 
-    // Fixed: Now matches the class created in your renderer.ts
-    .radio-wrapper .option-radio {
+    .option-radio {
       accent-color: $primary-blue;
     }
     
-    // Makes the text slightly darker and bolder when selected
     .option-text {
-      color: color.adjust($primary-blue, $lightness: -20%);
+      color: $primary-blue;
       font-weight: 500;
-      font-size: 1rem;
     }
   }
 
-  // Renamed from .radio-section to .radio-wrapper to match TypeScript
   .radio-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-right: 0.5rem;
-    margin-top: 0.2rem;
+    margin-right: 1rem;
 
     .option-radio {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       cursor: pointer;
-    }
-
-    .designator {
-      font-weight: 700;
-      color: #64748b;
     }
   }
 
   .option-label-letter {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 20px;
-    color: $primary-blue;
+    font-weight: 700;
+    margin-right: 12px;
+    color: #64748b;
   }
 
   .option-text {
     flex: 1;
-    line-height: 1.5;
     font-size: 1.1rem;
     color: $text-dark;
+    line-height: 1.5;
   }
 }

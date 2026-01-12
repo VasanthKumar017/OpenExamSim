@@ -1,0 +1,35 @@
+@use '../variables' as *;
+
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(45px, 1fr)); 
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  .nav-item {
+    padding: 0.6rem 0;
+    text-align: center;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all $transition-speed;
+
+    &.current { 
+      background: $primary-blue; 
+      color: white; 
+      border-color: $primary-blue;
+    }
+
+    &.answered { 
+      background: #c6f6d5; 
+      border-color: #48bb78; 
+      color: #22543d;
+    }
+
+    &:hover:not(.current) {
+      background-color: #f1f5f9;
+    }
+  }
+}

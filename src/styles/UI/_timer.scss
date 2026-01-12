@@ -1,10 +1,13 @@
 .exam-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 2rem;
-    
-    // Group the label and the timer together
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // Pushes timer left, button right
+  padding: 1rem 2rem;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+  box-sizing: border-box; // Ensures padding doesn't cause overflow
+  min-height: 70px;
     .timer-group {
         display: flex;
         align-items: center;
@@ -17,6 +20,12 @@
         color: #ff0000;
         text-transform: uppercase;
     }
+
+    .header-actions {
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+  }
 }
 
     .timer {

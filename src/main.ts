@@ -9,22 +9,22 @@ import { Timer } from './components/Timer';
 
 async function startApp() {
     // 1. SELECT DOM ELEMENTS (Dependency Gathering)
-    // Only main.ts is allowed to "know" about these specific IDs
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
     const startScreen = document.getElementById('start-screen')!;
     const startBtn = document.getElementById('start-btn')!;
     const endTestBtn = document.getElementById('end-test-btn') as HTMLButtonElement;
-    const timerDisplay = document.getElementById('timer-display'); // For the Timer component
-    const qCounter = document.getElementById('q-counter'); // For the UI counter
+    const timerDisplay = document.getElementById('timer-display');
+    const qCounter = document.getElementById('q-counter');
+    const optionsContainer = document.getElementById('options-container')!;
+    const qTextElement = document.getElementById('q-text')!;
 
     try {
         // 2. INITIALIZE CORE
         const questions = await fetchExamData();
         const engine = new ExamEngine(questions);
-        const renderer = new QuestionRenderer();
+        const renderer = new QuestionRenderer(optionsContainer, qTextElement);
         
         // 3. INJECT DEPENDENCIES
-        // We pass the appContainer directly to the ResultsRenderer
         const resultsView = new ResultsRenderer(appContainer);
         
         const saved = SessionManager.load();
@@ -32,7 +32,6 @@ async function startApp() {
             engine.loadState(saved.engineState);
         }
 
-        // We pass the timerDisplay element directly to the Timer
         const examTimer = new Timer(
             3600, 
             () => finishExam(), 
@@ -40,7 +39,7 @@ async function startApp() {
             timerDisplay
         );
 
-        // 4. UI ORCHESTRATION
+        // 4. UI ORCHESTRATION (Declarative Syncing)
         const updateUI = () => {
             const state = engine.getState();
             renderer.render(engine.getCurrentQuestion(), state.answers[state.currentIdx]);
@@ -81,7 +80,7 @@ async function startApp() {
 
         window.addEventListener('answer-selected', (e: Event) => {
             engine.handleAnswer((e as CustomEvent).detail.index);
-            updateUI();
+            updateUI(); // This re-renders everything in a fresh state
             SessionManager.save(engine, examTimer);
         });
 

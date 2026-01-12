@@ -1,11 +1,12 @@
 // src/styles/ui/_index.scss
 
 @forward '_timer';
-@forward 'results';
 @forward '_options';
-@forward 'nextNavigation';
+@forward '_controls';
 @forward '_start-screen';
 @forward '_counter';
 @forward '_end-button';
+@forward 'results';
+@forward '_navigation';
 
 // Add any future UI modules here
