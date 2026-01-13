@@ -37,6 +37,65 @@
     }
   }
 
+  .wrong-questions-nav {
+    background: white;
+    padding: 1.5rem;
+    border-radius: $border-radius;
+    box-shadow: $shadow-sm;
+    border-left: 12px solid #f56565;
+    position: fixed;
+    right: 2rem;
+    top: 80px;
+    width: 280px;
+    z-index: 50;
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .nav-btn {
+      background-color: #f56565;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 700;
+
+      &:hover:not(:disabled) {
+        background-color: #e53e3e;
+        transform: scale(1.1);
+      }
+
+      &:disabled {
+        background-color: #cbd5e0;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+
+    .nav-counter {
+      font-weight: 700;
+      color: #f56565;
+      font-size: 1rem;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .nav-label {
+      text-align: center;
+      color: #718096;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+  }
+
   .review-list {
     display: flex;
     flex-direction: column;
