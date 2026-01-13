@@ -8,6 +8,7 @@ import { ResultsRenderer } from './components/ResultsRenderer';
 import { Timer } from './components/Timer';
 import { eventBus } from './utils/EventBus';
 import { QuestionNavigation } from './components/QuestionNavigation';
+import { EndButton } from './components/EndButton';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
@@ -33,12 +34,28 @@ async function startApp() {
             engine.loadState(saved.engineState);
         }
 
+        let finishExam: () => void;
+        
         const examTimer = new Timer(
             3600, 
             () => finishExam(), 
             saved?.timeLeft, 
             timerDisplay
         );
+
+        const endButton = new EndButton(endTestBtn, () => {
+            finishExam();
+        });
+
+        finishExam = () => {
+            examTimer.stop();
+            SessionManager.clear();
+            resultsView.render(engine);
+            endButton.hide();
+            
+            const controls = document.querySelector('.controls') as HTMLElement;
+            if (controls) controls.style.display = 'none';
+        };
 
         const updateUI = () => {
             const state = engine.getState();
@@ -57,28 +74,10 @@ async function startApp() {
             SessionManager.save(engine, examTimer);
         });
 
-        const finishExam = () => {
-            examTimer.stop();
-            SessionManager.clear();
-            resultsView.render(engine);
-            
-            if (endTestBtn) endTestBtn.style.display = 'none';
-            const controls = document.querySelector('.controls') as HTMLElement;
-            if (controls) controls.style.display = 'none';
-        };
-
-        if (endTestBtn) {
-            endTestBtn.addEventListener('click', () => {
-                if (confirm("Are you sure you want to end the test and see your results?")) {
-                    finishExam();
-                }
-            });
-        }
-
         startBtn.addEventListener('click', () => {
             startScreen.classList.add('hidden');
             // FIX: Ensure button is visible when exam starts
-            if (endTestBtn) endTestBtn.style.display = 'block';
+            endButton.show();
             examTimer.start();
             updateUI();
             navTracker.render(); // Render tracker once the exam starts
@@ -99,7 +98,7 @@ async function startApp() {
         if (saved) {
             startScreen.classList.add('hidden');
             // FIX: Ensure button is visible when resuming
-            if (endTestBtn) endTestBtn.style.display = 'block';
+            endButton.show();
             examTimer.start();
             updateUI();
             navTracker.render(); // Ensure tracker shows up when resuming
