@@ -30,6 +30,16 @@ export class ExamEngine {
         };
     }
 
+    public resetState(): void {
+        this.state = {
+            currentIdx: 0,
+            answers: new Array(this.questions.length).fill(undefined),
+            isSubmitted: false,
+            visited: new Array(this.questions.length).fill(false)
+        };
+        this.state.visited[0] = true;
+    }
+
     // --- DATA GETTERS ---
     public getQuestions(): Question[] {
         return this.questions;

@@ -55,6 +55,9 @@ async function startApp() {
             
             const controls = document.querySelector('.controls') as HTMLElement;
             if (controls) controls.style.display = 'none';
+            
+            // Reset engine state for next attempt
+            engine.resetState();
         };
 
         const updateUI = () => {
