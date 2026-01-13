@@ -113,7 +113,7 @@ export class ExamEngine {
      * Helper to compare single or multiple answers safely.
      */
     private isCorrect(userAns: any, correctAns: any): boolean {
-        if (userAns === undefined) return false;
+        if (userAns === undefined || userAns === null) return false;
 
         // Robust check for Checkbox (Array) types
         if (Array.isArray(userAns) && Array.isArray(correctAns)) {

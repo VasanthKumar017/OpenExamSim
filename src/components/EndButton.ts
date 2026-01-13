@@ -21,7 +21,7 @@ export class EndButton {
         
         // Filter out undefined answers and empty arrays (unanswered checkboxes)
         const answeredCount = (state.answers as any[]).filter(a => 
-            a !== undefined && !(Array.isArray(a) && a.length === 0)
+            a !== undefined && a !== null && !(Array.isArray(a) && a.length === 0)
         ).length;
         const remainingCount = totalCount - answeredCount;
 
