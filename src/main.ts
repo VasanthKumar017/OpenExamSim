@@ -19,7 +19,7 @@ async function startApp() {
     const optionsContainer = document.getElementById('options-container')!;
     const qTextElement = document.getElementById('q-text')!;
     const navContainer = document.getElementById('nav-container')!; 
-    
+
 
     try {
         const questions = await fetchExamData();
@@ -27,7 +27,6 @@ async function startApp() {
         const renderer = new QuestionRenderer(optionsContainer, qTextElement);
         const resultsView = new ResultsRenderer(appContainer);
         const navTracker = new QuestionNavigation(navContainer, engine);
-        navTracker.render();
         
         const saved = SessionManager.load();
         if (saved && saved.engineState) {
@@ -52,8 +51,10 @@ async function startApp() {
             eventBus.emit('refresh-nav');
         };
 
+        // Listen for clicks from the Sidebar Navigation
         eventBus.on('nav-jump', () => {
             updateUI();
+            SessionManager.save(engine, examTimer);
         });
 
         const finishExam = () => {
@@ -80,6 +81,7 @@ async function startApp() {
             if (endTestBtn) endTestBtn.style.display = 'block';
             examTimer.start();
             updateUI();
+            navTracker.render(); // Render tracker once the exam starts
             SessionManager.startHeartbeat(engine, examTimer);
         });
 
@@ -100,6 +102,7 @@ async function startApp() {
             if (endTestBtn) endTestBtn.style.display = 'block';
             examTimer.start();
             updateUI();
+            navTracker.render(); // Ensure tracker shows up when resuming
             SessionManager.startHeartbeat(engine, examTimer);
         }
 

@@ -1,6 +1,5 @@
-/* src/styles/main.scss */
 @use 'sass:color';
-@use 'variables' as *; // Ensure this file actually contains $border-radius
+@use 'variables' as *; 
 @use 'UI'; 
 
 body {
@@ -19,7 +18,7 @@ body {
   margin: 0 auto;
 
   @media (min-width: 768px) {
-    flex-direction: row; // Sidebar to the right
+    flex-direction: row; 
     padding: 2rem;
     gap: 2rem;
   }
@@ -28,7 +27,6 @@ body {
     flex: 1;
     background: white;
     padding: 1.5rem;
-    /* Use a fallback if the variable fails again */
     border-radius: #{$border-radius}; 
     box-shadow: $shadow-sm;
     min-height: 600px;
@@ -51,16 +49,22 @@ body {
     .nav-sidebar {
       background: #e0e0ff;
       padding: 1.2rem;
-      border-radius: 8px; // Hardcoded simple fix if variable is brittle
+      border-radius: 8px;
       display: flex;
       flex-direction: column;
-      max-height: 80vh; 
+      max-height: 85vh; 
+
+      h3 {
+        margin: 0 0 1rem 0;
+        font-size: 0.85rem;
+        color: #444;
+      }
 
       .question-grid {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 8px;
-        overflow-y: auto; // Scrollbar fix
+        overflow-y: auto; 
         padding-right: 8px; 
         
         &::-webkit-scrollbar {
@@ -69,6 +73,51 @@ body {
         &::-webkit-scrollbar-thumb {
           background: #c0c0e0;
           border-radius: 10px;
+        }
+
+        .nav-item {
+          background: white;
+          border: 1px solid #ccc;
+          padding: 10px 5px;
+          font-size: 0.8rem;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: all 0.2s;
+          text-align: center;
+
+          &.current  { background: #ff6b35 !important; color: white; border-color: #e65a2b; }
+          &.answered { background: #28a745 !important; color: white; border-color: #1e7e34; }
+          &.skipped  { background: #ffc107 !important; color: #212529; border-color: #d39e00; }
+        
+          &:hover:not(.current):not(.answered):not(.skipped) {
+            background: #f0f0f0;
+          }
+        }
+      }
+
+      /* Legend styling added for clarity */
+      .nav-legend {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .legend-item {
+          display: flex;
+          align-items: center;
+          font-size: 0.75rem;
+          gap: 8px;
+
+          .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            &.orange { background: #ff6b35; }
+            &.green  { background: #28a745; }
+            &.yellow { background: #ffc107; }
+          }
         }
       }
     }

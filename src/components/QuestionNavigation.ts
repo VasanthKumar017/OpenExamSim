@@ -1,4 +1,3 @@
-// src/components/QuestionNavigation.ts
 import { ExamEngine } from '../core/engine';
 import { eventBus } from '../utils/EventBus';
 
@@ -10,7 +9,6 @@ export class QuestionNavigation {
         this.container = container;
         this.engine = engine;
 
-        // Listen for UI updates to refresh the grid
         eventBus.on('refresh-nav', () => this.render());
     }
 
@@ -24,11 +22,21 @@ export class QuestionNavigation {
                 <div class="question-grid">
                     ${questions.map((_, index) => {
                         const isCurrent = state.currentIdx === index;
-                        const isAnswered = state.answers[index] !== undefined;
+
+                        const answer = state.answers[index];
+                        const isAnswered = answer !== undefined && answer !== null;
+
+                        const isVisited = state.visited && state.visited[index];
+                        // const isSkipped = !isAnswered && index < state.currentIdx;
                         
                         let statusClass = '';
-                        if (isCurrent) statusClass = 'current';
-                        else if (isAnswered) statusClass = 'answered';
+                        if (isCurrent) {
+                                statusClass = 'current';
+                            } else if (isAnswered) {
+                                statusClass = 'answered';
+                            } else if (isVisited && !isAnswered) {
+                                statusClass = 'skipped';
+                            }
 
                         return `
                             <button class="nav-item ${statusClass}" data-index="${index}">
@@ -37,18 +45,20 @@ export class QuestionNavigation {
                         `;
                     }).join('')}
                 </div>
+
+                <div class="nav-legend">
+                    <div class="legend-item"><span class="dot orange"></span> Current</div>
+                    <div class="legend-item"><span class="dot green"></span> Answered</div>
+                    <div class="legend-item"><span class="dot yellow"></span> Skipped</div>
+                </div>
             </div>
         `;
 
-        // Add click listeners to jump to questions
         this.container.querySelectorAll('.nav-item').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const index = parseInt((e.currentTarget as HTMLElement).dataset.index!);
                 this.engine.goToQuestion(index);
-                
-                // Emit event to update the main question display
                 eventBus.emit('refresh-nav'); 
-                // We use a custom event or a direct callback in main.ts to trigger updateUI
                 eventBus.emit('nav-jump');
             });
         });

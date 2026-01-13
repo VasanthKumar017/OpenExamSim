@@ -10,4 +10,5 @@ export interface ExamState {
     currentIdx: number;
     answers: Record<number, number | number[]>;
     isSubmitted: boolean;
+    visited: boolean[];
 }

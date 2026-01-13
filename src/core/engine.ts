@@ -13,13 +13,21 @@ export class ExamEngine {
         this.state = {
             currentIdx: 0,
             answers: new Array(questions.length).fill(undefined),
-            isSubmitted: false
+            isSubmitted: false,
+            // Track which questions the user has actually seen
+            visited: new Array(questions.length).fill(false) 
         };
+        // Mark the very first question as visited immediately
+        this.state.visited[0] = true;
     }
 
     // --- STATE RECOVERY ---
     public loadState(savedState: ExamState): void {
-        this.state = { ...savedState };
+        // Ensure visited exists if loading from an older save
+        this.state = { 
+            ...savedState,
+            visited: savedState.visited || new Array(this.questions.length).fill(false)
+        };
     }
 
     // --- DATA GETTERS ---
@@ -42,18 +50,27 @@ export class ExamEngine {
     public next(): void {
         if (this.state.currentIdx < this.questions.length - 1) {
             this.state.currentIdx++;
+            this.markVisited(this.state.currentIdx);
         }
     }
 
     public prev(): void {
         if (this.state.currentIdx > 0) {
             this.state.currentIdx--;
+            this.markVisited(this.state.currentIdx);
         }
     }
 
     public goToQuestion(index: number): void {
         if (index >= 0 && index < this.questions.length) {
             this.state.currentIdx = index;
+            this.markVisited(index);
+        }
+    }
+
+    private markVisited(index: number): void {
+        if (this.state.visited) {
+            this.state.visited[index] = true;
         }
     }
 
