@@ -9,6 +9,7 @@ import { Timer } from './components/Timer';
 import { eventBus } from './utils/EventBus';
 import { QuestionNavigation } from './components/QuestionNavigation';
 import { EndButton } from './components/EndButton';
+import { FullscreenExamManager } from './components/FullscreenExamManager';
 
 async function startApp() {
     const appContainer = document.querySelector<HTMLDivElement>('#app')!;
@@ -47,6 +48,10 @@ async function startApp() {
             finishExam();
         });
 
+        const fullscreenManager = new FullscreenExamManager(() => {
+            finishExam();
+        });
+
         finishExam = () => {
             examTimer.stop();
             SessionManager.clear();
@@ -58,6 +63,9 @@ async function startApp() {
             
             // Reset engine state for next attempt
             engine.resetState();
+            
+            // Exit fullscreen and remove warnings
+            fullscreenManager.endExam();
         };
 
         const updateUI = () => {
@@ -85,6 +93,9 @@ async function startApp() {
             updateUI();
             navTracker.render(); // Render tracker once the exam starts
             SessionManager.startHeartbeat(engine, examTimer);
+            
+            // Start fullscreen and warning management
+            fullscreenManager.startExam();
         });
 
         eventBus.on('answer-selected', (e: CustomEvent) => {
@@ -106,6 +117,9 @@ async function startApp() {
             updateUI();
             navTracker.render(); // Ensure tracker shows up when resuming
             SessionManager.startHeartbeat(engine, examTimer);
+            
+            // Start fullscreen and warning management
+            fullscreenManager.startExam();
         }
 
     } catch (error) {

@@ -8,6 +8,9 @@
   width: 100%;
   box-sizing: border-box; // Ensures padding doesn't cause overflow
   min-height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
     .timer-group {
         display: flex;
         align-items: center;
