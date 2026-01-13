@@ -2,9 +2,9 @@ export class FullscreenExamManager {
     private warningCount: number = 0;
     private maxWarnings: number = 3;
     private onExamEnd: () => void;
-    private handleBeforeUnloadFn: (e: BeforeUnloadEvent) => string | undefined;
-    private handleVisibilityChangeFn: () => void;
-    private handleKeyDownFn: (e: KeyboardEvent) => void;
+    private handleBeforeUnloadFn!: (e: BeforeUnloadEvent) => string | undefined;
+    private handleVisibilityChangeFn!: () => void;
+    private handleKeyDownFn!: (e: KeyboardEvent) => void;
     private wasHidden: boolean = false;
 
     constructor(onExamEnd: () => void) {
