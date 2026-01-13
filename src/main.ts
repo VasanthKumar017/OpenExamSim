@@ -43,7 +43,7 @@ async function startApp() {
             timerDisplay
         );
 
-        const endButton = new EndButton(endTestBtn, () => {
+        const endButton = new EndButton(endTestBtn, engine, () => {
             finishExam();
         });
 
