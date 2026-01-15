@@ -1,402 +1,819 @@
 [
   {
     "id": 1,
-    "category": "Technical",
-    "text": "PL No. of an item is 29731057. This item may be an item of:",
-    "options": ["Stationery", "Electric Locomotive", "Electrical item", "Diesel Locomotive"],
-    "correctAnswer": 2,
+    "category": "Traction Motor",
+    "text": "Which type of motor works as traction motors (TMs) in MAE-675 EMU?",
+    "options": ["Synchronous 3-phase induction motor", "Asynchronous 3-phase squirrel cage induction motor", "Asynchronous 3-phase wound rotor motor", "DC series motor"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 2,
-    "category": "Inventory Control",
-    "text": "In VED analysis, which category includes items critical for operation?",
-    "options": ["Vital", "Essential", "Desirable", "Surplus"],
+    "category": "Electrical Safety",
+    "text": "Which voltage range is considered safe low voltage?",
+    "options": ["0–110 V", "110–250 V", "0–651 V", "Above 651 V"],
     "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 3,
-    "category": "Inventory Control",
-    "text": "ABC analysis is based on:",
-    "options": ["Criticality", "Consumption value", "Availability", "Durability"],
+    "category": "Power Electronics",
+    "text": "Which transistor is used in the LTC of a 3-phase EMU?",
+    "options": ["GTO", "IGBT", "Thyristor", "MOSFET"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 4,
-    "category": "Stores",
-    "text": "Items stocked for emergency use only are called:",
-    "options": ["Stock items", "Imprest items", "Non-stock items", "Surplus items"],
-    "correctAnswer": 1,
+    "category": "Traction Motor",
+    "text": "What is the continuous power rating of a 3-phase EMU traction motor?",
+    "options": ["268 kW", "268 HP", "278 kW", "168 kW"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 5,
-    "category": "Stores",
-    "text": "Which document is used to indent material from stores?",
-    "options": ["Issue Note", "Indent", "Invoice", "Receipt Voucher"],
+    "category": "Performance",
+    "text": "What is the maximum service speed of a 3-phase EMU?",
+    "options": ["96 kmph", "110 kmph", "100 kmph", "120 kmph"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 6,
-    "category": "Technical",
-    "text": "Which current is used in EMU traction motors?",
-    "options": ["AC", "DC", "Single phase AC", "Three phase AC"],
-    "correctAnswer": 1,
+    "category": "Mechanical",
+    "text": "What is the gear ratio used in a 3-phase EMU/MEMU?",
+    "options": ["103/23", "91/20", "100/22", "77/20"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 7,
-    "category": "Electrical",
-    "text": "Standard OHE voltage used in Indian Railways is:",
-    "options": ["11 kV", "15 kV", "25 kV", "66 kV"],
-    "correctAnswer": 2,
+    "category": "Auxiliary Supply",
+    "text": "What is the hotel load supply in a 3-phase EMU?",
+    "options": ["110 V DC", "110 V AC", "141 V AC", "141 V DC"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 8,
-    "category": "Electrical",
-    "text": "The function of a circuit breaker is to:",
-    "options": ["Increase voltage", "Store energy", "Protect circuit", "Reduce current"],
+    "category": "Transformer",
+    "text": "How many secondary power windings are available in the main transformer of a 3-phase EMU?",
+    "options": ["4", "6", "2", "5"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 9,
-    "category": "Technical",
-    "text": "Which motor is commonly used for traction purposes?",
-    "options": ["Induction motor", "Synchronous motor", "DC series motor", "Stepper motor"],
-    "correctAnswer": 2,
+    "category": "High Voltage Equipment",
+    "text": "Where is the line voltage potential transformer located in a 3-phase EMU?",
+    "options": ["Roof of DTC", "Roof of NDTC", "Roof of DTC (duplicate)", "Roof of MC"],
+    "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
     "id": 10,
-    "category": "Contracts",
-    "text": "The warranty period as per IRS conditions is:",
-    "options": ["12/6 months", "18/12 months", "24/18 months", "36/30 months"],
+    "category": "LTC",
+    "text": "How many portions are there in the LTC of a 3-phase EMU?",
+    "options": ["2", "3", "4", "1"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
+
   {
     "id": 11,
-    "category": "Contracts",
-    "text": "Liquidated damages are levied due to:",
-    "options": ["Early delivery", "Late delivery", "Wrong supply", "Excess supply"],
-    "correctAnswer": 1,
+    "category": "LTC",
+    "text": "Which converter in the LTC feeds 3-phase supply to the traction motors?",
+    "options": ["Line converter", "DC link", "Drive converter", "Auxiliary converter"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 12,
-    "category": "Establishment/Personnel",
-    "text": "Maximum accumulation of LAP is:",
-    "options": ["180 days", "240 days", "300 days", "No limit"],
+    "category": "Instrumentation",
+    "text": "Under which condition does the line voltmeter read OHE voltage in a 3-phase EMU?",
+    "options": ["Closed VCB", "DCS key inserted", "PT raised", "Reverser thrown"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 13,
-    "category": "Establishment/Personnel",
-    "text": "Casual leave cannot be combined with:",
-    "options": ["LAP", "LHP", "Sick Leave", "Joining Time"],
-    "correctAnswer": 3,
+    "category": "Traction Motor",
+    "text": "What is the maximum continuous voltage that can be applied to a 3-phase EMU traction motor?",
+    "options": ["1171 V", "1375 V", "2280 V", "1800 V"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 14,
-    "category": "Conduct Rules",
-    "text": "Railway Servants Conduct Rules came into force in:",
-    "options": ["1956", "1966", "1968", "1972"],
-    "correctAnswer": 2,
+    "category": "Rake Formation",
+    "text": "How many coaches form one basic unit of MAE-675 EMU?",
+    "options": ["3", "2", "4", "5"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 15,
-    "category": "Conduct Rules",
-    "text": "Accepting gifts from subordinates is:",
-    "options": ["Allowed", "Allowed with permission", "Prohibited", "Optional"],
+    "category": "Auxiliary Equipment",
+    "text": "In which coach is the Main Air Compressor (MAC) mounted in MAE-675 EMU?",
+    "options": ["NDTC", "MC", "DTC", "None"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
+
   {
     "id": 16,
-    "category": "D&AR",
-    "text": "Major penalties include:",
-    "options": ["Censure", "Withholding increments", "Reduction in rank", "Warning"],
-    "correctAnswer": 2,
+    "category": "Auxiliary Equipment",
+    "text": "In which coach is the MAC mounted in MAE-675M MEMU?",
+    "options": ["NDTC", "DMC", "DTC", "None"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 17,
-    "category": "D&AR",
-    "text": "Suspension is considered as:",
-    "options": ["Punishment", "Minor penalty", "Major penalty", "Temporary measure"],
-    "correctAnswer": 3,
+    "category": "LTC",
+    "text": "What is the DC link voltage of the LTC in a 3-phase EMU?",
+    "options": ["1700 V DC", "1700 V AC", "1800 V DC", "1800 V AC"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 18,
-    "category": "Safety",
-    "text": "Which equipment is used for earthing?",
-    "options": ["Fuse", "Relay", "Earth switch", "Contactor"],
-    "correctAnswer": 2,
-    "type": "multiple-choice"
-  },
-  {
-    "id": 19,
-    "category": "Safety",
-    "text": "Personal protective equipment does NOT include:",
-    "options": ["Helmet", "Gloves", "Safety shoes", "Multimeter"],
+    "category": "OHE",
+    "text": "What is the minimum OHE voltage required for 3-phase EMU operation?",
+    "options": ["25 kV", "22.5 kV", "19.5 kV", "16 kV"],
     "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
-    "id": 20,
-    "category": "General Knowledge",
-    "text": "Indian Railways is under which ministry?",
-    "options": ["Transport", "Home Affairs", "Railways", "Commerce"],
-    "correctAnswer": 2,
+    "id": 19,
+    "category": "Transformer",
+    "text": "What is the continuous input power rating of the 3-phase EMU transformer?",
+    "options": ["1299 kVA", "1659 kVA", "160 kVA", "960 kVA"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
+    "id": 20,
+    "category": "Transformer",
+    "text": "What is the power rating of each traction secondary of the EMU transformer?",
+    "options": ["793 kVA", "1299 kVA", "960 kVA", "70 kVA"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+
+  {
     "id": 21,
-    "category": "General Knowledge",
-    "text": "Indian Railways was nationalized in:",
-    "options": ["1947", "1948", "1951", "1955"],
+    "category": "Auxiliary Supply",
+    "text": "Emergency lights in 3-phase EMU coaches operate on which supply?",
+    "options": ["141 V DC", "110 V AC", "110 V DC", "120 V DC"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 22,
-    "category": "Electrical",
-    "text": "Which device converts AC to DC?",
-    "options": ["Inverter", "Rectifier", "Transformer", "Chopper"],
+    "category": "Auxiliary Converter",
+    "text": "What is the input voltage to the auxiliary converter of a 3-phase EMU?",
+    "options": ["1600 V DC", "1800 V DC", "960 V DC", "110 V DC"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 23,
-    "category": "Electrical",
-    "text": "Unit of electrical resistance is:",
-    "options": ["Ampere", "Volt", "Ohm", "Watt"],
+    "category": "Auxiliary Converter",
+    "text": "What is the power rating of the auxiliary converter in a 3-phase EMU?",
+    "options": ["120 kVA", "180 kVA", "60 kVA", "70 kVA"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 24,
-    "category": "Technical",
-    "text": "Which brake system is used in EMU?",
-    "options": ["Vacuum brake", "Air brake", "Hydraulic brake", "Mechanical brake"],
+    "category": "Auxiliary Converter",
+    "text": "What is the output voltage of the auxiliary converter in a 3-phase EMU?",
+    "options": ["380 V", "415 V", "110 V", "141 V"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 25,
-    "category": "Technical",
-    "text": "Pantograph is used to:",
-    "options": ["Supply air", "Collect current", "Control speed", "Apply brakes"],
-    "correctAnswer": 1,
+    "category": "Bogie",
+    "text": "Which bogie arrangement is used in a 3-phase EMU?",
+    "options": ["B-B", "CO-CO", "BO-BO", "A-A"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
+
   {
     "id": 26,
-    "category": "Stores",
-    "text": "Dead stock verification is done:",
-    "options": ["Monthly", "Quarterly", "Annually", "Once in 5 years"],
-    "correctAnswer": 2,
+    "category": "Traction",
+    "text": "What is the full form of TE in traction terminology?",
+    "options": ["Tractive Efficiency", "Tractive Effort", "Traction Energy", "Total Energy"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 27,
-    "category": "Stores",
-    "text": "Unserviceable items are disposed through:",
-    "options": ["Auction", "Transfer", "Repair", "Condemnation"],
-    "correctAnswer": 0,
+    "category": "Rake Formation",
+    "text": "Maximum how many basic units can form a 3-phase EMU rake?",
+    "options": ["3", "4", "5", "6"],
+    "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
     "id": 28,
-    "category": "Rajbhasha",
-    "text": "Official language of the Union of India is:",
-    "options": ["English", "Hindi", "Sanskrit", "Tamil"],
-    "correctAnswer": 1,
+    "category": "Protection",
+    "text": "Which type of main circuit breaker is provided in a 3-phase EMU?",
+    "options": ["VCB vertical S/B", "VCB D/B", "ABB type", "OCB"],
+    "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
     "id": 29,
-    "category": "Rajbhasha",
-    "text": "Rajbhasha Diwas is celebrated on:",
-    "options": ["14 September", "2 October", "26 January", "15 August"],
-    "correctAnswer": 0,
+    "category": "Auxiliary Supply",
+    "text": "From where does the auxiliary converter receive its input power?",
+    "options": ["Auxiliary winding", "Power secondary-1", "DC link of LTC", "Battery"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 30,
-    "category": "Safety",
-    "text": "First aid for electric shock is:",
-    "options": ["Give water", "Isolate supply", "Apply ointment", "Bandage immediately"],
-    "correctAnswer": 1,
+    "category": "Protection",
+    "text": "At what high OHE voltage will a 3-phase EMU shut down?",
+    "options": ["27.5 kV", "29 kV", "30 kV", "31 kV"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
+
   {
     "id": 31,
-    "category": "Technical",
-    "text": "Which relay protects against overcurrent?",
-    "options": ["OVR", "OLR", "EFR", "NVR"],
-    "correctAnswer": 1,
-    "type": "multiple-choice"
-  },
-  {
-    "id": 32,
-    "category": "Electrical",
-    "text": "Frequency of AC supply in India is:",
-    "options": ["50 Hz", "60 Hz", "25 Hz", "100 Hz"],
+    "category": "OHE",
+    "text": "What OHE frequency variation is permitted for 3-phase EMU operation?",
+    "options": ["±8%", "±5%", "±3%", "±6%"],
     "correctAnswer": 0,
     "type": "multiple-choice"
   },
   {
+    "id": 32,
+    "category": "Battery",
+    "text": "What is the AH capacity of the battery provided in a 3-phase EMU?",
+    "options": ["90 AH", "110 AH", "100 AH", "120 AH"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
     "id": 33,
-    "category": "Contracts",
-    "text": "Earnest Money Deposit is taken to:",
-    "options": ["Increase price", "Ensure commitment", "Pay taxes", "Cover transport"],
+    "category": "Transformer",
+    "text": "How many oil pumps are provided for the main transformer in a 3-phase EMU?",
+    "options": ["2", "1", "3", "None"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 34,
-    "category": "Establishment/Personnel",
-    "text": "Probation period for new recruits is generally:",
-    "options": ["6 months", "1 year", "2 years", "3 years"],
+    "category": "Braking",
+    "text": "Where is the brake chopper resistor located in a 3-phase EMU?",
+    "options": ["HT of MC", "Roof of MC/DMC", "NDTC underframe", "Inside LTC"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 35,
-    "category": "D&AR",
-    "text": "Authority competent to impose major penalty is:",
-    "options": ["Immediate supervisor", "Disciplinary authority", "Colleague", "Accounts officer"],
-    "correctAnswer": 1,
+    "category": "Traction Motor",
+    "text": "How many traction motors are provided in one basic unit of a 3-phase EMU?",
+    "options": ["3", "2", "4", "6"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
+
   {
     "id": 36,
-    "category": "General Knowledge",
-    "text": "Longest railway zone in India is:",
-    "options": ["Central Railway", "Eastern Railway", "Western Railway", "Northern Railway"],
+    "category": "Battery",
+    "text": "How many batteries are provided in one basic unit of a 3-phase EMU?",
+    "options": ["10", "20", "26", "18"],
     "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
     "id": 37,
-    "category": "Electrical",
-    "text": "Insulation resistance is measured using:",
-    "options": ["Voltmeter", "Ammeter", "Megger", "Wattmeter"],
-    "correctAnswer": 2,
-    "type": "multiple-choice"
-  },
-  {
-    "id": 38,
-    "category": "Technical",
-    "text": "Which component stores electrical energy?",
-    "options": ["Resistor", "Capacitor", "Inductor", "Diode"],
+    "category": "Battery",
+    "text": "Which type of battery is used in a 3-phase EMU?",
+    "options": ["Ni-Cd", "Lithium", "Lead acid", "Nickel metal hydride"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
+    "id": 38,
+    "category": "Battery",
+    "text": "What is the voltage of one battery cell used in a 3-phase EMU?",
+    "options": ["11 V", "3.6 V", "6 V", "10 V"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
     "id": 39,
-    "category": "Safety",
-    "text": "Red signal indicates:",
-    "options": ["Proceed", "Caution", "Stop", "Slow"],
+    "category": "Battery",
+    "text": "What is the AH capacity of the complete 3-phase EMU battery set?",
+    "options": ["90 AH", "110 AH", "120 AH", "75 AH"],
     "correctAnswer": 2,
     "type": "multiple-choice"
   },
   {
     "id": 40,
-    "category": "Safety",
-    "text": "Yellow signal indicates:",
-    "options": ["Stop", "Proceed", "Caution", "Emergency"],
-    "correctAnswer": 2,
+    "category": "Auxiliary Motor",
+    "text": "Which type of motor is used as the drive motor for the MAC in a 3-phase EMU?",
+    "options": ["DC series motor", "3-phase induction motor", "1-phase induction motor", "Synchronous motor"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 41,
-    "category": "Technical",
-    "text": "Wheel slip occurs due to:",
-    "options": ["Low voltage", "High load", "Poor adhesion", "Over braking"],
-    "correctAnswer": 2,
+    "category": "Traction Motor",
+    "text": "Which type of induction motor is used as traction motor in 3-phase EMU?",
+    "options": ["Synchronous motor", "Asynchronous squirrel cage motor", "DC series motor", "Wound rotor motor"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 42,
-    "category": "Electrical",
-    "text": "Which device steps up or steps down voltage?",
-    "options": ["Rectifier", "Inverter", "Transformer", "Chopper"],
-    "correctAnswer": 2,
+    "category": "Electrical Safety",
+    "text": "Which voltage range is classified as unsafe high voltage?",
+    "options": ["0–110 V", "110–250 V", "0–651 V", "Above 651 V"],
+    "correctAnswer": 3,
     "type": "multiple-choice"
   },
   {
     "id": 43,
-    "category": "Stores",
-    "text": "FIFO stands for:",
-    "options": ["First In First Out", "Fast In Fast Out", "First Issue First Out", "Free Issue First Out"],
-    "correctAnswer": 0,
+    "category": "Power Electronics",
+    "text": "Which semiconductor device controls power in the LTC of 3-phase EMU?",
+    "options": ["Thyristor", "IGBT", "Diode", "Transistor"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 44,
-    "category": "Stores",
-    "text": "Stock verification ensures:",
-    "options": ["Price increase", "Accuracy of records", "Faster purchase", "Higher profit"],
+    "category": "Performance",
+    "text": "The continuous power rating of traction motor in 3-phase EMU is expressed in:",
+    "options": ["HP", "kW", "kVA", "Ampere"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 45,
-    "category": "General Knowledge",
-    "text": "First railway in India was between:",
-    "options": ["Delhi–Agra", "Mumbai–Thane", "Kolkata–Howrah", "Chennai–Arcot"],
-    "correctAnswer": 1,
+    "category": "Mechanical",
+    "text": "Gear ratio of 103/23 is associated with which system?",
+    "options": ["Brake system", "Auxiliary drive", "Traction drive", "Compressor drive"],
+    "correctAnswer": 2,
     "type": "multiple-choice"
   },
+
   {
     "id": 46,
-    "category": "Rajbhasha",
-    "text": "Hindi week is celebrated in the month of:",
-    "options": ["August", "September", "October", "November"],
+    "category": "Auxiliary Supply",
+    "text": "Hotel load supply in 3-phase EMU is mainly used for:",
+    "options": ["Traction motors", "Passenger amenities", "Battery charging", "Brake chopper"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 47,
-    "category": "D&AR",
-    "text": "Charge sheet is issued during:",
-    "options": ["Promotion", "Inquiry", "Training", "Transfer"],
+    "category": "Transformer",
+    "text": "Main transformer of a 3-phase EMU supplies power primarily to:",
+    "options": ["Auxiliary converter only", "Traction and auxiliary circuits", "Battery only", "Lighting circuit"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 48,
-    "category": "Electrical",
-    "text": "Which law relates voltage, current, and resistance?",
-    "options": ["Faraday’s Law", "Ohm’s Law", "Kirchhoff’s Law", "Lenz’s Law"],
+    "category": "High Voltage Equipment",
+    "text": "Potential transformer in 3-phase EMU is used to measure:",
+    "options": ["Motor current", "Line voltage", "DC link voltage", "Battery voltage"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 49,
-    "category": "Technical",
-    "text": "Which bearing is commonly used in traction motors?",
-    "options": ["Ball bearing", "Roller bearing", "Thrust bearing", "Plain bearing"],
+    "category": "LTC",
+    "text": "LTC in 3-phase EMU mainly performs which function?",
+    "options": ["Mechanical control", "AC to AC conversion", "DC to DC conversion", "Battery charging"],
     "correctAnswer": 1,
     "type": "multiple-choice"
   },
   {
     "id": 50,
-    "category": "Safety",
-    "text": "Fire extinguisher used for electrical fires is:",
-    "options": ["Water", "Foam", "CO2", "Sand"],
+    "category": "LTC",
+    "text": "DC link in LTC is used to:",
+    "options": ["Store energy temporarily", "Increase OHE voltage", "Supply AC directly", "Operate brakes"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 51,
+    "category": "Instrumentation",
+    "text": "Line voltmeter indicates OHE voltage when:",
+    "options": ["VCB open", "PT lowered", "PT raised", "Reverser neutral"],
     "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 52,
+    "category": "Rake Formation",
+    "text": "MAE-675 EMU basic unit consists of how many coaches?",
+    "options": ["2", "3", "4", "5"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 53,
+    "category": "Auxiliary Equipment",
+    "text": "Main Air Compressor in MAE-675 EMU is mounted under which coach?",
+    "options": ["MC", "NDTC", "DTC", "DMC"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 54,
+    "category": "Auxiliary Equipment",
+    "text": "MAC in MAE-675M MEMU is mounted under:",
+    "options": ["NDTC", "DMC", "MC", "DTC"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 55,
+    "category": "LTC",
+    "text": "DC link voltage of LTC in 3-phase EMU is approximately:",
+    "options": ["1700 V", "1600 V", "1800 V", "1500 V"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 56,
+    "category": "OHE",
+    "text": "Minimum OHE voltage required for 3-phase EMU operation is:",
+    "options": ["25 kV", "22.5 kV", "19.5 kV", "16 kV"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 57,
+    "category": "Transformer",
+    "text": "Input power rating of main transformer is measured in:",
+    "options": ["kW", "kVA", "HP", "Ampere"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 58,
+    "category": "Auxiliary Supply",
+    "text": "Emergency lighting in coaches is supplied by:",
+    "options": ["Auxiliary converter", "Battery", "Transformer", "DC link"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 59,
+    "category": "Auxiliary Converter",
+    "text": "Auxiliary converter output voltage is used mainly for:",
+    "options": ["Traction motors", "Auxiliary loads", "Battery only", "Brake chopper"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 60,
+    "category": "Bogie",
+    "text": "BO-BO bogie arrangement indicates:",
+    "options": ["Two powered axles per bogie", "Four powered axles", "No powered axles", "Single axle drive"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 61,
+    "category": "Traction",
+    "text": "Tractive effort is used to describe:",
+    "options": ["Speed of train", "Pulling force at wheel", "Energy efficiency", "Power rating"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 62,
+    "category": "Rake Formation",
+    "text": "Maximum number of basic units allowed in one EMU rake is:",
+    "options": ["4", "5", "6", "7"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 63,
+    "category": "Protection",
+    "text": "Main circuit breaker in 3-phase EMU is used to:",
+    "options": ["Control speed", "Isolate high voltage supply", "Charge battery", "Operate brakes"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 64,
+    "category": "Auxiliary Supply",
+    "text": "Auxiliary converter input is taken from:",
+    "options": ["Transformer secondary", "Battery", "DC link", "OHE directly"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 65,
+    "category": "Protection",
+    "text": "High OHE voltage shutdown occurs at approximately:",
+    "options": ["27.5 kV", "29 kV", "30 kV", "32 kV"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 66,
+    "category": "OHE",
+    "text": "Permissible OHE frequency variation for 3-phase EMU is:",
+    "options": ["±3%", "±5%", "±6%", "±8%"],
+    "correctAnswer": 3,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 67,
+    "category": "Battery",
+    "text": "Battery capacity is expressed in:",
+    "options": ["kW", "Volt", "Ampere-hour", "kVA"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 68,
+    "category": "Transformer",
+    "text": "Oil pumps in transformer are used for:",
+    "options": ["Insulation", "Cooling", "Voltage regulation", "Protection"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 69,
+    "category": "Braking",
+    "text": "Brake chopper resistor dissipates energy during:",
+    "options": ["Acceleration", "Coasting", "Regenerative braking", "Parking"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 70,
+    "category": "Traction Motor",
+    "text": "Total number of traction motors in one basic unit is:",
+    "options": ["2", "3", "4", "6"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 71,
+    "category": "Battery",
+    "text": "Number of batteries provided in one basic unit is:",
+    "options": ["10", "18", "20", "26"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 72,
+    "category": "Battery",
+    "text": "Lithium batteries are preferred due to:",
+    "options": ["High weight", "Low energy density", "High energy density", "Low cost"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 73,
+    "category": "Battery",
+    "text": "Each battery cell voltage in 3-phase EMU is:",
+    "options": ["3.6 V", "6 V", "10 V", "11 V"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 74,
+    "category": "Battery",
+    "text": "Total battery capacity provided in 3-phase EMU is:",
+    "options": ["90 AH", "110 AH", "120 AH", "75 AH"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 75,
+    "category": "Auxiliary Motor",
+    "text": "MAC drive motor in 3-phase EMU is of type:",
+    "options": ["DC series", "3-phase induction", "1-phase induction", "Synchronous"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 76,
+    "category": "System Overview",
+    "text": "3-phase EMU primarily operates on which traction system?",
+    "options": ["DC traction", "Single-phase AC", "Three-phase AC", "Hybrid"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 77,
+    "category": "System Overview",
+    "text": "Primary advantage of 3-phase traction is:",
+    "options": ["Simple control", "Higher efficiency", "Low speed only", "Mechanical braking"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 78,
+    "category": "Protection",
+    "text": "VCB stands for:",
+    "options": ["Vacuum Circuit Breaker", "Voltage Control Box", "Variable Control Breaker", "Vacuum Control Box"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 79,
+    "category": "Auxiliary Supply",
+    "text": "Auxiliary loads include:",
+    "options": ["Traction motors", "Lighting and fans", "Pantograph", "VCB"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 80,
+    "category": "Braking",
+    "text": "Brake chopper resistor is mounted on:",
+    "options": ["Underframe", "Roof", "Inside LTC", "Bogies"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 81,
+    "category": "Traction Motor",
+    "text": "Traction motors receive power from:",
+    "options": ["Auxiliary converter", "Drive converter", "Battery", "Transformer directly"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 82,
+    "category": "Transformer",
+    "text": "Transformer converts OHE voltage to:",
+    "options": ["Mechanical energy", "Usable electrical levels", "DC only", "Battery supply"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 83,
+    "category": "OHE",
+    "text": "Standard OHE supply for EMU is:",
+    "options": ["15 kV AC", "25 kV AC", "3 kV DC", "750 V DC"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 84,
+    "category": "Auxiliary Converter",
+    "text": "Auxiliary converter converts:",
+    "options": ["AC to AC", "DC to AC", "AC to DC", "DC to DC"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 85,
+    "category": "Battery",
+    "text": "Batteries mainly supply power during:",
+    "options": ["Normal run", "Acceleration", "Power failure", "Braking"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 86,
+    "category": "Protection",
+    "text": "VCB operates under:",
+    "options": ["Air", "Oil", "Vacuum", "Gas"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 87,
+    "category": "Traction",
+    "text": "Traction effort is maximum during:",
+    "options": ["Coasting", "Braking", "Starting", "Cruising"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 88,
+    "category": "LTC",
+    "text": "LTC helps in controlling:",
+    "options": ["Speed and torque", "Lighting", "Battery charging", "Brakes only"],
+    "correctAnswer": 0,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 89,
+    "category": "Auxiliary Equipment",
+    "text": "MAC supplies compressed air for:",
+    "options": ["Cooling only", "Braking and auxiliaries", "Traction motors", "Lighting"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 90,
+    "category": "Braking",
+    "text": "Regenerative braking converts kinetic energy into:",
+    "options": ["Heat", "Mechanical energy", "Electrical energy", "Sound energy"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 91,
+    "category": "System Overview",
+    "text": "3-phase EMU control is mainly:",
+    "options": ["Mechanical", "Electro-mechanical", "Electronic", "Manual"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 92,
+    "category": "Protection",
+    "text": "Overvoltage protection protects against:",
+    "options": ["Low voltage", "High voltage", "Short circuit", "Earth fault"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 93,
+    "category": "Auxiliary Supply",
+    "text": "Lighting in coaches normally operates on:",
+    "options": ["415 V AC", "110 V DC", "25 kV AC", "1800 V DC"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 94,
+    "category": "Traction Motor",
+    "text": "Squirrel cage motors are preferred due to:",
+    "options": ["High maintenance", "Simple and rugged design", "Low efficiency", "High cost"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 95,
+    "category": "System Overview",
+    "text": "EMU stands for:",
+    "options": ["Electric Motor Unit", "Electric Multiple Unit", "Energy Management Unit", "Electric Main Unit"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+
+  {
+    "id": 96,
+    "category": "System Overview",
+    "text": "MEMU stands for:",
+    "options": ["Main Electric Multiple Unit", "Medium Electric Motor Unit", "Mainline Electric Multiple Unit", "Mechanical EMU"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 97,
+    "category": "OHE",
+    "text": "Pantograph is used to:",
+    "options": ["Convert voltage", "Collect current from OHE", "Control speed", "Protect transformer"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 98,
+    "category": "Auxiliary Converter",
+    "text": "Auxiliary converter ensures uninterrupted supply to:",
+    "options": ["Traction motors", "Auxiliary loads", "Pantograph", "VCB"],
+    "correctAnswer": 1,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 99,
+    "category": "EMU Operation",
+    "text": "Which mode is selected during station stops?",
+    "options": ["Acceleration", "Coasting", "Braking and standstill", "Cruising"],
+    "correctAnswer": 2,
+    "type": "multiple-choice"
+  },
+  {
+    "id": 100,
+    "category": "Overall System",
+    "text": "Which feature makes 3-phase EMUs energy efficient?",
+    "options": ["DC motors", "Regenerative braking", "Mechanical control", "High battery usage"],
+    "correctAnswer": 1,
     "type": "multiple-choice"
   }
 ]
